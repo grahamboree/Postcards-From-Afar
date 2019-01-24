@@ -1,0 +1,27 @@
+Tile and map info:
+
+Tile number:
+0 - player standing, front
+1 - player run, front
+2 - player standing, back
+3 - player run, back
+4 - button up
+5 - button pressed
+6 - enemy 1
+7 - enemy 2
+8 - door left closed
+9 - door left opened
+10 - door right closed
+11 - door right opened
+12 - 25 walls (also 29)
+26 - gate, side, closed
+27 - gate/wall tile, closed
+28 - gate/wall, open (replace side gate with a main floor tile (32) ) 
+29 - corner wall
+30 - forward facing gate left closed (replace with floor tile 32)
+31 - forward facing gate right closed (replace with floor tile 32)
+
+32 - main floor tile
+32+ - floors and window tiles
+
+55 - last tile for now
