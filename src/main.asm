@@ -105,7 +105,9 @@ tileBytestoLoadSizeLow	RB 1
 RSSET _RAM_BLOCK_0 + 96
 _RAM_BLOCK_1			RB 0
 
-windowToggle			RB 1
+isWindowVisible			RB 1
+wantWindowVisible		RB 1
+
 currentTextPage			RB 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -269,8 +271,8 @@ _BLACK EQU %0000000000000000
 	call 	memcpy
 
 	; load start screen toggle value
-	ld		a, 0
-	ld		[windowToggle], a
+	ld		a, 1
+	ld		[wantWindowVisible], a
 
 	; set current background offset
 	ld 		a, 6
@@ -319,7 +321,6 @@ GameLoop:
 	
 	
 	
-	call	ShowWindow
 	call	ReadPad
 	call	DetectPadEvents
 
@@ -358,6 +359,7 @@ GameLoop:
 	ld		a, [scrollY]
 	ld		[rSCY], a
 
+	call	UpdateWindowVisibility
 	call	$FF80 ; Call DMA Copy routine
 
 	; end VRAM dependent code
@@ -433,10 +435,20 @@ DetectPadEvents:
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-ShowWindow:
-	ld		a, [windowToggle]
+UpdateWindowVisibility:
+	ld		a, [isWindowVisible]
+	ld		b, a
+	ld		a, [wantWindowVisible]
+
+	; if the visibility flag matches what we want, return
+	cp		b
+	ret 	z
+
 	cp		0
-	ret 	nz
+	jr		z, .CloseWindow
+
+	ld		a, 1
+	ld		[isWindowVisible], a
 
 	ld		a, 7
 	ld		[rWX], a	; window x location
