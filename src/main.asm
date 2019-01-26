@@ -22,9 +22,6 @@ _PAD_LEFT	EQU		%00100000
 _PAD_UP		EQU		%01000000
 _PAD_DOWN	EQU		%10000000
 
-_PLAYER_ANIM_SPEED	EQU		15
-_PLAYER_MOVE_SPEED	EQU		1
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Ram
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -34,8 +31,8 @@ _PLAYER_MOVE_SPEED	EQU		1
 RSSET _RAM
 _SHADOW_OAM	RB 0
 
-playerY		RB 1	; Y Coord
-playerX		RB 1	; X Coord
+_SPR0_Y		RB 1	; Y Coord
+_SPR0_X		RB 1	; X Coord
 _SPR0_NUM	RB 1	; Tile number
 _SPR0_ATT	RB 1	; Attribute flags
 
@@ -49,6 +46,25 @@ _SPR2_X		RB 1	; X Coord
 _SPR2_NUM	RB 1	; Tile number
 _SPR2_ATT	RB 1	; Attribute flags
 
+_SPR3_Y		RB 1	; Y Coord
+_SPR3_X		RB 1	; X Coord
+_SPR3_NUM	RB 1	; Tile number
+_SPR3_ATT	RB 1	; Attribute flags
+
+_SPR4_Y		RB 1	; Y Coord
+_SPR4_X		RB 1	; X Coord
+_SPR4_NUM	RB 1	; Tile number
+_SPR4_ATT	RB 1	; Attribute flags
+
+_SPR5_Y		RB 1	; Y Coord
+_SPR5_X		RB 1	; X Coord
+_SPR5_NUM	RB 1	; Tile number
+_SPR5_ATT	RB 1	; Attribute flags
+
+_SPR6_Y		RB 1	; Y Coord
+_SPR6_X		RB 1	; X Coord
+_SPR6_NUM	RB 1	; Tile number
+_SPR6_ATT	RB 1	; Attribute flags
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; BLOCK 0
@@ -66,29 +82,17 @@ bgLeftEdge				RB 1 	; where are we writing our next west tile 0-31
 
 scrollX					RB 1
 scrollY					RB 1
-screenShakeX			RB 1
-screenShakeY			RB 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; BLOCK 1
-; 128 bytes
-; mostly for player data
 RSSET _RAM_BLOCK_0 + 96
 _RAM_BLOCK_1			RB 0
 
-playerSprite			RB 1	; the player sprite number
-playerDirection 		RB 1	; bit 0 = up/down, up = 1;  bit 1 = left/right, left = 1
-playerAnimFrameTimer	RB 1	; how many cycles before we change animation frame
-
-playerCollision			RB 1	; bit mask indicating collisions. %0000udlr
-
-playerMoveTimer			RB 1	; how long before we should move the player
+windowToggle			RB 1
+currentTextPage			RB 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RSSET _RAM_BLOCK_1 + 128
 _RAM_BLOCK_2			RB 0
-
-startScreenToggle		RB 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RSSET _RAM_BLOCK_2 + 128
@@ -241,7 +245,7 @@ _BLACK EQU %0000000000000000
 
 	; load start screen toggle value
 	ld		a, 0
-	ld		[startScreenToggle], a
+	ld		[windowToggle], a
 
 	; set current background offset
 	ld 		a, 6
@@ -264,33 +268,14 @@ _BLACK EQU %0000000000000000
 	ld		[rSCX], a
 	ld		[scrollX], a
 
-	; Set the initial state of the player.
-	ld 		a, 60
-	ld		[playerY], a
-	ld		[playerX], a
-
-	ld 		a, _PLAYER_ANIM_SPEED
-	ld 		[playerAnimFrameTimer], a
-	ld 		a, 0
-	ld 		[playerSprite], a
-
-	ld		hl, playerMoveTimer
-	ld		[hl], _PLAYER_MOVE_SPEED
-
 	; configure and activate display
 	ld		a, LCDCF_ON|LCDCF_BG8000|LCDCF_BG9800|LCDCF_BGON|LCDCF_OBJ8|LCDCF_OBJON|LCDCF_WIN9C00
 	ld		[rLCDC], a
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 GameLoop:
-	call	StartScreen
-	call	CollidePlayer
-
+	call	ShowWindow
 	call	ReadPad
-	call	Movement
-	call	Facing
-	call	AnimatePlayer
-	call	RenderPlayer
 
 .waitForVBlank:
 	ld		a, [rLY]
@@ -300,11 +285,12 @@ GameLoop:
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; start VRAM dependent code
 
+	; set camera scroll position
 	ld		a, [scrollX]
 	ld		[rSCX], a
 	ld		a, [scrollY]
 	ld		[rSCY], a
-	call	CopyNewBGTiles
+
 	call	$FF80 ; Call DMA Copy routine
 
 	; end VRAM dependent code
@@ -318,284 +304,6 @@ GameLoop:
 	jr		GameLoop
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-CopyNewBGTiles:
-	; Early out if we don't need to draw a new bg column
-	ld		a, [bgDrawDirection]
-	cp		0
-	ret		z
-
-	; load the background map into bc
-	ld		bc, MAIN_MAP
-	ld		de, _SCRN0
-
-.DrawBGCol:
-	; check which direction we are drawing
-	cp		_EAST
-	jr		z, .DrawEast
-
-.DrawWest:
-	; get the destination in vram
-	ld		a, [bgLeftEdge]
-	ld		h,  0
-	ld		l,  a
-	add		hl, de
-	ld		d, h
-	ld		e, l
-
-	push de
-
-	; set the low index to offset-6
-	ld		a, [bgOffset]
-	ld		h, 0
-	ld		l, a
-	ld		de, 6
-	add		hl, de
-	add		hl, bc
-	ld		b, h
-	ld		c, l
-
-	pop de
-
-	ld		a, 16
-	jr		.CopyBGColumn
-
-.DrawEast:
-	; get the destination in vram
-	ld		a, [bgRightEdge]
-	ld		h,  0
-	ld		l,  a
-	add		hl, de
-	ld		d, h
-	ld		e, l
-
-	push de
-
-	; set the high index to offset+20+6
-	ld		a, [bgOffset]
-	ld		h, 0
-	ld		l, a
-	ld		de, 26
-	add		hl, de
-	add		hl, bc
-	ld		b, h
-	ld		c, l
-
-	pop de
-
-	ld		a, 16
-
-; a  - row count
-; bc - source of our ROM data
-; de - VRAM destination
-.CopyBGColumn:
-	ld		h, a
-
-	; copy a byte
-	ld		a, [bc]
-	ld		[de], a
-
-	ld		a, h
-
-	; add 32 to the RAM destination
-	ld		hl, 32
-	add		hl, de
-	ld		d, h
-	ld		e, l
-
-	; add 128 to the ROM source
-	ld		hl, 128
-	add		hl, bc
-	ld		b, h
-	ld		c, l
-
-	dec		a
-	ret		z
-	jr		.CopyBGColumn
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-CollidePlayer:
-	; compute the axis extents of the player
-	; find the 9 surrounding tiles
-	; determine if any should be considered blocked
-	; for any blocked cells, compute if we touch.
-	; if we touch, keep a record of that.
-
-	ret
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-RenderPlayer:
-	; Compute the correct sprite number and write it to the OAM
-	ld 		a, [playerDirection] ; has bit 1 set for left/right.  1 is left
-	and		%00000001	; mask out the y-direction bit
-	sla		a						; a *= 2
-	ld		hl, playerSprite
-	add		a, [hl]
-	ld 		[_SPR0_NUM], a
-
-	; Compute sprite attributes
-	; byte 3 bit 5 for x-swap
-	ld 		a, [playerDirection] ; has bit 1 set for left/right.  1 is left
-	and		%00000010		; mask out the x-direction bit
-	swap	a				; puts the x direction value in the x-flip attribute bit location
-	or		%00010000		; additional flags
-	ld		[_SPR0_ATT], a	; set the attributes
-
-	; Reset the up/down flag so the player doesn't stay facing up
-	ld		a, [playerDirection]
-	and		%11111110	; Clear the up bit
-	ld		[playerDirection], a
-
-	ret
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-AnimatePlayer:
-	; If we have no input, just set it to the start sprite
-	ld		a, [padInput]
-	and		_PAD_LEFT | _PAD_RIGHT | _PAD_UP | _PAD_DOWN
-	jr		z, .ResetAnim
-
-	; check if it's time to switch frames
-	ld		hl, playerAnimFrameTimer
-	dec		[hl]
-	ld		a, [hl]
-	cp		0							; is it 0 yet?
-	ret		nz							; if it is not, return (this is the delay)
-
-	; reset the frame timer
-	ld		[hl], _PLAYER_ANIM_SPEED
-
-	; change the sprite
-	ld		hl, playerSprite
-	inc		[hl]
-
-	; if the animation isn't over, return
-	ld		a, [hl]
-	cp		2
-	ret		nz
-
-.ResetAnim
-	; reset the frame timer
-	ld		hl, playerAnimFrameTimer
-	ld		[hl], _PLAYER_ANIM_SPEED
-
-	; retart aniamtion frame number
-	ld		hl, playerSprite
-	ld		[hl], 0
-	ret
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-Movement:
-	ld		hl, playerMoveTimer
-	dec		[hl]
-	ret		nz
-	ld		[hl], _PLAYER_MOVE_SPEED
-	
-.MoveRight
-	ld		a, [padInput]
-	and		_PAD_RIGHT
-	call	nz, MoveRight
-
-.MoveLeft
-	ld		a, [padInput]
-	and		_PAD_LEFT
-	call	nz, MoveLeft
-
-	ld		hl, playerY
-.MoveUp
-	ld		a, [padInput]
-	and		_PAD_UP
-	jr		z, .MoveDown
-	dec		[hl]
-
-.MoveDown
-	ld		a, [padInput]
-	and		_PAD_DOWN
-	ret		z
-	inc		[hl]
-	ret
-
-MoveLeft:
-	; Check if we should move the screen or the player
-	ld		hl, playerX
-	ld		a, [hl]
-	cp		32
-	jp		z, .LeftScreen
-
-	; Change player position
-	dec		[hl]
-	ret
-
-	; Change screen position, load data if necessary
-.LeftScreen
-	call	ScrollLeft
-	ret
-
-MoveRight:
-	; check for move edge
-	ld		hl, playerX
-	ld		a, [hl]
-	cp		121
-	jp		z, .RightScreen
-
-	; update player position
-	inc		[hl]
-	ret
-
-	; move scroll, load bg if necessary
-.RightScreen
-	call	ScrollRight
-	ret
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-Facing:
-	ld		a, [playerDirection]
-	ld		c, a
-	ld		a, [padInput]
-	ld		b, a
-
-	; b has padInput
-	; c has playerDirection
-.FaceRight
-	and		_PAD_RIGHT
-	jr		z, .FaceLeft
-
-	; Set the direction flag bit
-	ld		a, c
-	and		%11111101
-	ld		c, a
-
-.FaceLeft
-	ld		a, b
-	and		_PAD_LEFT
-	jr		z, .FaceUp
-
-	; Set the direction flag bit
-	ld		a, c
-	or		%00000010
-	ld		c, a
-
-.FaceUp
-	ld		a, b
-	and		_PAD_UP
-	jr		z, .FaceDown
-
-	; Set the direction flag bit
-	ld		a, c
-	or		%00000001
-	ld		c, a
-
-.FaceDown
-	ld		a, b
-	and		_PAD_DOWN
-	ld		a, c	; doesn't clear zero flag and saves us some instructions doing it here.
-	jr		z, .Save
-	and		%11111110
-
-.Save
-	ld		[playerDirection], a
-	ret
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; read button state into [padInput]
 ReadPad:
@@ -633,8 +341,8 @@ ReadPad:
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-StartScreen:
-	ld		a, [startScreenToggle]
+ShowWindow:
+	ld		a, [windowToggle]
 	cp		0
 	ret 	nz
 
@@ -660,7 +368,7 @@ StartScreen:
 .CloseWindow
 	; turn off start screen toggle
 	ld		a, 5
-	ld		[startScreenToggle], a
+	ld		[windowToggle], a
 
 	; deactivate the window and activate the sprites
 	ld		a, [rLCDC]
@@ -668,93 +376,6 @@ StartScreen:
 	or		LCDCF_OBJON		; turn on objects
 	or		LCDCF_BGON		; turn off background
 	ld		[rLCDC], a		; apply changes
-	ret
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-ScrollRight:
-	; increment X scroll
-	ld		hl, scrollX
-	ld		a, [hl]
-	inc 	a
-	ld 		[hl], a
-
-	and		%00000111		; check if divisible by 8
-	ret		nz
-
-	; increment background vram east and west
-	ld		hl, bgRightEdge
-	ld		a, [hl]
-	inc		a
-	cp 		a, 32
-	jr 		nz, .SaveEastInc
-	ld 		a, 0
-.SaveEastInc
-	ld		[hl], a
-
-	ld		hl, bgLeftEdge
-	ld		a, [hl]
-	inc		a
-	cp		a, 32
-	jr		nz, .SaveWestInc
-	ld		a, 0
-.SaveWestInc
-	ld		[hl], a
-
-	ld 		hl, bgOffset
-	ld		a, [hl]
-	inc		a
-	cp		128
-	jr		nz, .SaveOffsetInc
-	ld		a, 0
-.SaveOffsetInc
-	ld 		[hl], a
-
-	ld 		a, 1
-	ld 		[bgDrawDirection], a
-	ret
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-ScrollLeft:
-	ld		hl, scrollX	; load a with screen x scroll
-	ld		a, [hl]
-	dec		a
-	ld		[hl], a
-	and		%00000111			; check if divisible by 8
-	ret		nz
-
-	; decrement background light vram east and west
-.DecBgLight:
-	ld		hl, bgRightEdge
-	ld		a, [hl]
-	cp 		a, 0
-	jr		nz, .SaveEastDec
-	ld		a, 32
-.SaveEastDec
-	dec		a
-	ld		[hl], a
-
-	ld		hl, bgLeftEdge
-	ld		a, [hl]
-	cp		a, 0
-	jr		nz, .SaveWestDec
-	ld		a, 32
-.SaveWestDec
-	dec		a
-	ld		[hl], a
-
-	ld		hl, bgOffset
-	ld		a, [hl]
-	dec		a
-	cp		a, -1
-	jr		nz, .SaveOffsetDec
-	ld		a, 127
-.SaveOffsetDec
-	ld		[hl], a
-
-	ld		a, 2
-	ld		[bgDrawDirection], a
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
