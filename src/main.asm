@@ -290,7 +290,8 @@ _BLACK EQU %0000000000000000
 	ld		[rLCDC], a
 	
 ;Clear local variables
-	ld a, 0
+	;ld a, 0
+	
 	ld [currentScreen], a
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -572,6 +573,14 @@ Text2:
 	INCLUDE "text2.inc"
 Text2End:
 
+UITiles:
+INCLUDE "UiTiles.inc"
+UITilesEnd:
+
+LocationCursor:
+	INCLUDE "LocationSelector.inc"
+LocationCursorEnd:
+	
 FontData:
 	chr_IBMPC1
 EndFontData:
