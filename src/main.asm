@@ -288,6 +288,10 @@ _BLACK EQU %0000000000000000
 	; configure and activate display
 	ld		a, LCDCF_ON|LCDCF_BG8000|LCDCF_BG9800|LCDCF_BGON|LCDCF_OBJ8|LCDCF_OBJON|LCDCF_WIN9C00
 	ld		[rLCDC], a
+	
+;Clear local variables
+	ld a, 0
+	ld [currentScreen], a
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 GameLoop:
