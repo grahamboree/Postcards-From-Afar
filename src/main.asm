@@ -336,22 +336,22 @@ GameLoop:
 	
 	;Temp Code : pyramids and scuba toggle
 	
-	ld a, [padState]
+	ld a, [padDown]
 	cp 0
 	jp z, .doNotLoad
 	
 	ld a, [isPyramidsLoaded]
 	cp 0
-	jp nz, .loadScuba
+	jp nz, .loadAirplane
 	
 	call LoadPyramids
 	ld a, 1
 	ld [isPyramidsLoaded], a
 	jp .doNotLoad
 	
-.loadScuba
-	call LoadScuba
-	ld a, 1
+.loadAirplane
+	call LoadAirplane
+	ld a, 0
 	ld [isPyramidsLoaded], a
 	jp .doNotLoad
 	
@@ -426,13 +426,13 @@ LoadPyramids:
 	ld [tileBytesToLoadSizeLow], a
 	ret
 	
-LoadScuba:
-	ld bc, ScubaTiles
+LoadAirplane:
+	ld bc, AirplaneTiles
 	ld a, b
 	ld [tileBytesToLoadHigh], a
 	ld a, c
 	ld [tileBytesToLoadLow], a
-	ld bc, EndScubaTiles - ScubaTiles
+	ld bc, EndAirplaneTiles - AirplaneTiles
 	ld a, b
 	ld [tileBytesToLoadSizeHigh], a
 	ld a, c
@@ -681,13 +681,21 @@ UITiles:
 INCLUDE "UiTiles.inc"
 UITilesEnd:
 
-PyramidTiles:
-	DB $00,$00,$00,$00
-EndPyramidTiles:
+AirplaneTiles:
+	DB $44,$44,$44,$44,$44,$44,$44,$44
+EndAirplaneTiles:
 
-ScubaTiles:
-	DB $00,$00,$00,$00
-EndScubaTiles:
+SafariTiles:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndSafariTiles:
+
+WaterfallTiles:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndWaterfallTiles:
+
+PyramidTiles:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndPyramidTiles:
 
 LocationCursor:
 	INCLUDE "LocationSelector.inc"
