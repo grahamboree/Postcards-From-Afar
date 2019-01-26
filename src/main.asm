@@ -98,8 +98,8 @@ currentScreen			RB 1	;What screen are we on
 
 tileBytesToLoadHigh		RB 1	;What tiles to load on the next VBlank
 tileBytesToLoadLow		RB 1
-tileBytestoLoadSizeHigh	RB 1
-tileBytestoLoadSizeLow	RB 1
+tileBytesToLoadSizeHigh	RB 1
+tileBytesToLoadSizeLow	RB 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RSSET _RAM_BLOCK_0 + 96
@@ -316,8 +316,8 @@ GameLoop:
 ;LoadTiles cleanup, so we don't load tiles every frame
 .loadTilesCleanup:
 	ld a, 0
-	ld [TileBytesToCopySizeHigh], a
-	ld [TileBytesToCopySizeLow], a
+	ld [tileBytesToLoadSizeHigh], a
+	ld [tileBytesToLoadSizeLow], a
 	
 	
 	
