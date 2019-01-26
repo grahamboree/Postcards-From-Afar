@@ -21,6 +21,15 @@ _PAD_LEFT	EQU		%00100000
 _PAD_UP		EQU		%01000000
 _PAD_DOWN	EQU		%10000000
 
+; Game Screens
+_INTRO		  EQU	0
+_CHOOSE_STORY EQU	1
+_READ_STORY	  EQU	2
+_CHOOSE_CARD  EQU	3
+_READ_CARD	  EQU	4
+_OUTRO		  EQU	5
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Ram
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -81,6 +90,8 @@ bgLeftEdge				RB 1 	; where are we writing our next west tile 0-31
 
 scrollX					RB 1
 scrollY					RB 1
+
+currentScreen			RB 1	;What screen are we on
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RSSET _RAM_BLOCK_0 + 96
@@ -280,6 +291,48 @@ _BLACK EQU %0000000000000000
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 GameLoop:
+
+
+;Determine what screen to show and process
+.testGameMode:
+	ld		a, [currentScreen]
+	
+	cp 		_INTRO
+	jp 		z, .screenIntro
+	
+	cp 		_OUTRO
+	jp 		z, .screenOutro
+	
+	cp		_READ_CARD
+	jp 		z, .screenReadCard
+	
+	cp		_READ_STORY
+	jp 		z, .screenReadStory
+	
+	cp		_CHOOSE_CARD
+	jp 		z, .screenChooseCard
+	
+	cp		_CHOOSE_STORY
+	jp 		z, .screenChooseStory
+	
+	stop	;Catch invalid game mode
+	
+;Code for various game screens
+.screenIntro:
+	jp .doneScreen
+.screenOutro:
+	jp .doneScreen
+.screenReadCard:
+	jp .doneScreen
+.screenReadStory:
+	jp .doneScreen
+.screenChooseCard:
+	jp .doneScreen
+.screenChooseStory:
+	jp .doneScreen
+
+	
+.doneScreen	
 	call	ShowWindow
 	call	ReadPad
 
