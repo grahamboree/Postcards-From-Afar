@@ -13,7 +13,7 @@ char_list = [
 #with open(text_file) as f:
 #    text = f.read()
 
-text = "This is a much longer test that should run over into multiple lines.  Let's see if it works!"
+text = "This is a second page of text that is different from the first and needs to be paginated!"
 
 # screen is 20x18 but we want a border
 max_width = 20
