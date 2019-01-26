@@ -115,8 +115,9 @@ RSSET _RAM_BLOCK_6 + 128
 _RAM_BLOCK_7			RB 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ; IRQs
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 SECTION	"Vblank", ROM0[$0040]
 	reti
 SECTION	"LCDC", ROM0[$0048]
@@ -129,6 +130,8 @@ SECTION	"p1thru4", ROM0[$0060]
 	reti
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Rom Header
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Header and start vector boilerplate
 SECTION "header", ROM0[$0100]
@@ -137,6 +140,10 @@ SECTION "header", ROM0[$0100]
 
 	; ROM Header (Macro defined in gbhw.inc)
 	ROM_HEADER ROM_NOMBC, ROM_SIZE_32KBYTE, RAM_SIZE_0KBYTE
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Code
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 SECTION "game code", ROM0[$0150]
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -237,7 +244,7 @@ _BLACK EQU %0000000000000000
 	; copy tile map to VRAM
 	call	CopyTileMap
 
-	; copy	window tile map
+	; copy window tile map
 	ld		hl, Text
 	ld		de, _SCRN1			; map 1 location
 	ld		bc, 32 * 32			; screen size
@@ -303,7 +310,6 @@ GameLoop:
 
 	jr		GameLoop
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; read button state into [padInput]
 ReadPad:
@@ -379,7 +385,6 @@ ShowWindow:
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; tileMap copy routine
 CopyTileMap:
 	ld		hl, MAIN_MAP
 	ld		de, _SCRN0		; map 0 loaction
@@ -439,10 +444,9 @@ memcpy:
 
 	ret
 
-
 ;***************************************************************************
 ;*
-;* mem_Copy - "Copy" a monochrome font from ROM to RAM
+;* mem_CopyMono - "Copy" a monochrome font from ROM to RAM
 ;*
 ;* input:
 ;*   hl - pSource
@@ -451,18 +455,20 @@ memcpy:
 ;*
 ;***************************************************************************
 mem_CopyMono::
-	inc	b
-	inc	c
-	jr	.skip
-.loop	ld	a,[hl+]
-	ld	[de],a
-	inc	de
-        ld      [de],a
-        inc     de
-.skip	dec	c
-	jr	nz,.loop
-	dec	b
-	jr	nz,.loop
+	inc		b
+	inc		c
+	jr		.skip
+.loop
+	ld		a,[hl+]
+	ld		[de],a
+	inc		de
+	ld		[de],a
+	inc		de
+.skip
+	dec		c
+	jr		nz,.loop
+	dec		b
+	jr 		nz,.loop
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -476,14 +482,16 @@ mem_CopyMono::
 ; 	bc: number of bytes to fill
 ; 	hl: destination address
 memfill:
-	inc	b
-	inc	c
-	jr	.skip
-.loop	ld	[hl+],a
-.skip	dec	c
-	jr nz, .loop
-	dec	b
-	jr nz, .loop
+	inc		b
+	inc		c
+	jr		.skip
+.loop
+	ld		[hl+],a
+.skip
+	dec		c
+	jr		nz, .loop
+	dec		b
+	jr		nz, .loop
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
