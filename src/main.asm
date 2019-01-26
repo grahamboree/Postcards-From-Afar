@@ -2,6 +2,7 @@
 
 ; hardware definitions
 INCLUDE "gbchw.inc"
+INCLUDE "font.inc"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Constants
@@ -223,11 +224,17 @@ _BLACK EQU %0000000000000000
 	ld		bc, EndTiles - Tiles	; number of bytes to copy
 	call	memcpy
 
+	; copy tiles to VRAM
+	ld		hl, FontData				; source
+	ld		de, _VRAM					; destination
+	ld		bc, EndFontData - FontData	; number of bytes to copy
+	call	mem_CopyMono
+
 	; copy tile map to VRAM
 	call	CopyTileMap
 
 	; copy	window tile map
-	ld		hl, WINDOW_START
+	ld		hl, Text
 	ld		de, _SCRN1			; map 1 location
 	ld		bc, 32 * 32			; screen size
 	call 	memcpy
@@ -276,7 +283,7 @@ _BLACK EQU %0000000000000000
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 GameLoop:
-	;call	StartScreen
+	call	StartScreen
 	call	CollidePlayer
 
 	call	ReadPad
@@ -631,16 +638,18 @@ StartScreen:
 	cp		0
 	ret 	nz
 
-	ld		a, 8
+	ld		a, 7
 	ld		[rWX], a	; window x location
 
 	ld		a, 0
 	ld		[rWY], a	; window y location
 
 	; activate windows and deactivate sprites
-	ld		a, [rLCDC]	; load LCD control contents
-	or		LCDCF_WINON	; check if window is on
-	res		1, a		; bit 1 to 0
+	ld		a, [rLCDC]		; load LCD control contents
+	or		LCDCF_WINON		; check if window is on
+	xor		LCDCF_BGOFF		; turn off background
+	xor		LCDCF_OBJOFF	; turn off sprites
+	res		1, a			; bit 1 to 0
 	ld		[rLCDC], a
 
 .CheckExit
@@ -657,6 +666,7 @@ StartScreen:
 	ld		a, [rLCDC]
 	res		5, a			; reset window sprites to 0
 	or		LCDCF_OBJON		; turn on objects
+	or		LCDCF_BGON		; turn off background
 	ld		[rLCDC], a		; apply changes
 	ret
 
@@ -808,6 +818,32 @@ memcpy:
 
 	ret
 
+
+;***************************************************************************
+;*
+;* mem_Copy - "Copy" a monochrome font from ROM to RAM
+;*
+;* input:
+;*   hl - pSource
+;*   de - pDest
+;*   bc - bytecount of Source
+;*
+;***************************************************************************
+mem_CopyMono::
+	inc	b
+	inc	c
+	jr	.skip
+.loop	ld	a,[hl+]
+	ld	[de],a
+	inc	de
+        ld      [de],a
+        inc     de
+.skip	dec	c
+	jr	nz,.loop
+	dec	b
+	jr	nz,.loop
+	ret
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; fill memory
 ; write a specific byte value to a range of memory.
@@ -844,6 +880,14 @@ EndMap:
 WindowStart:
 	INCLUDE"windowstart.z80"
 EndWindowStart:
+
+Text:
+	INCLUDE "text.inc"
+TextEnd:
+
+FontData:
+	chr_IBMPC1
+EndFontData:
 
 ; End Screen
 ; EndScreen:
