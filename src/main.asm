@@ -81,7 +81,10 @@ _SPR6_ATT	RB 1	; Attribute flags
 RSSET _RAM + 160
 _RAM_BLOCK_0			RB 0
 
-padInput				RB 1	; The input from the d-pad and buttons
+padOldState				RB 1	; The last frame's input from the d-pad and buttons
+padState				RB 1	; The input from the d-pad and buttons
+padDown					RB 1	; Bits are set here the first frame a button is pressed
+padUp					RB 1	; Bits are set here the first frame a button is released
 
 bgDrawDirection			RB 1	; Which direction of the background do we draw, 1 = east, 2 = west
 bgOffset				RB 1	; how far to the right (in tiles) is our leftmost tile in data
@@ -277,6 +280,13 @@ _BLACK EQU %0000000000000000
 	ld 		a, 0
 	ld 		[bgLeftEdge], a
 
+	; clear pad input state
+	ld		a, 0
+	ld		[padState], a
+	ld		[padOldState], a
+	ld		[padDown], a
+	ld		[padUp], a
+
 	; clear Shadow OAM
 	ld		a, 0		; put everything to zero
 	ld		bc, 40 * 4	; 40 sprites, 4 bytes each = 160 bytes
@@ -311,8 +321,7 @@ GameLoop:
 	
 	call	ShowWindow
 	call	ReadPad
-	
-	
+	call	DetectPadEvents
 
 ;Pre-VBlank Load variables for when VBlank is done
 .loadTilesPrep:
@@ -364,7 +373,7 @@ GameLoop:
 	;END MAIN LOOP
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; read button state into [padInput]
+; read button state into [padState]
 ReadPad:
 	; check the d-pad
 	ld		a, %00100000	; bit 4 to 0, 5 to 1 (Activate d-pad, not buttons)
@@ -396,7 +405,31 @@ ReadPad:
 
 	; now we have in A the state of all buttons, compliment and store variable
 	cpl
-	ld		[padInput], a
+	ld		[padState], a
+	ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+DetectPadEvents:
+	; put current pad state in b
+	ld		a, [padState]
+	ld		b, a
+
+	ld		a, [padOldState]
+	xor		b
+	and		b
+	ld		[padDown], a
+
+	ld		a, [padOldState]
+	ld		c, a
+	xor		b
+	and		c
+	ld		[padUp], a
+
+	ld		a, [padState]
+	ld		[padOldState], a
+
+	ret
+	
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
