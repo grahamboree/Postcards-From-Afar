@@ -96,6 +96,8 @@ scrollY					RB 1
 
 currentScreen			RB 1	;What screen are we on
 
+isPyramidsLoaded		RB 1
+
 tileBytesToLoadHigh		RB 1	;What tiles to load on the next VBlank
 tileBytesToLoadLow		RB 1
 tileBytesToLoadSizeHigh	RB 1
@@ -309,7 +311,16 @@ _BLACK EQU %0000000000000000
 ;Clear local variables
 	ld a, _CHOOSE_STORY
 	ld [currentScreen], a
+	
+	ld a, 1
+	ld [isPyramidsLoaded], a
 
+	ld a, 0
+	ld [tileBytesToLoadHigh], a
+	ld [tileBytesToLoadLow], a
+	ld [tileBytesToLoadSizeHigh], a
+	ld [tileBytesToLoadSizeLow], a
+	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 GameLoop:
 
@@ -318,12 +329,36 @@ GameLoop:
 	ld a, 0
 	ld [tileBytesToLoadSizeHigh], a
 	ld [tileBytesToLoadSizeLow], a
-	
-	
-	
+
+.doneTilesCleanup:	
 	call	ReadPad
 	call	DetectPadEvents
-
+	
+	;Temp Code : pyramids and scuba toggle
+	
+	ld a, [padState]
+	cp 0
+	jp z, .doNotLoad
+	
+	ld a, [isPyramidsLoaded]
+	cp 0
+	jp nz, .loadScuba
+	
+	call LoadPyramids
+	ld a, 1
+	ld [isPyramidsLoaded], a
+	jp .doNotLoad
+	
+.loadScuba
+	call LoadScuba
+	ld a, 1
+	ld [isPyramidsLoaded], a
+	jp .doNotLoad
+	
+	;End Temp Code
+	
+.doNotLoad:	
+	
 ;Pre-VBlank Load variables for when VBlank is done
 .loadTilesPrep:
 	ld a, [tileBytesToLoadSizeHigh]
@@ -373,6 +408,36 @@ GameLoop:
 	jr		GameLoop
 	
 	;END MAIN LOOP
+	
+;;Gameplay content loading commands
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Load the various large images on VBlank, and do any other scene-transition work
+LoadPyramids:
+	ld bc, PyramidTiles
+	ld a, b
+	ld [tileBytesToLoadHigh], a
+	ld a, c
+	ld [tileBytesToLoadLow], a
+	ld bc, EndPyramidTiles - PyramidTiles
+	ld a, b
+	ld [tileBytesToLoadSizeHigh], a
+	ld a, c
+	ld [tileBytesToLoadSizeLow], a
+	ret
+	
+LoadScuba:
+	ld bc, ScubaTiles
+	ld a, b
+	ld [tileBytesToLoadHigh], a
+	ld a, c
+	ld [tileBytesToLoadLow], a
+	ld bc, EndScubaTiles - ScubaTiles
+	ld a, b
+	ld [tileBytesToLoadSizeHigh], a
+	ld a, c
+	ld [tileBytesToLoadSizeLow], a
+	ret
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; read button state into [padState]
@@ -615,6 +680,14 @@ Text2End:
 UITiles:
 INCLUDE "UiTiles.inc"
 UITilesEnd:
+
+PyramidTiles:
+	DB $00,$00,$00,$00
+EndPyramidTiles:
+
+ScubaTiles:
+	DB $00,$00,$00,$00
+EndScubaTiles:
 
 LocationCursor:
 	INCLUDE "LocationSelector.inc"
