@@ -1,6 +1,5 @@
 ; vim: tabstop=4 shiftwidth=4 noexpandtab ft=z80
 
-; hardware definitions
 INCLUDE "gbchw.inc"
 INCLUDE "font.inc"
 
@@ -444,25 +443,23 @@ memcpy:
 
 	ret
 
-;***************************************************************************
-;*
-;* mem_CopyMono - "Copy" a monochrome font from ROM to RAM
-;*
-;* input:
-;*   hl - pSource
-;*   de - pDest
-;*   bc - bytecount of Source
-;*
-;***************************************************************************
-mem_CopyMono::
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; copy a monochrome font
+; same as memcpy but it copies each byte to the destionation twice.
+;
+; input:
+;   bc: number of bytes to copy
+;   de: destination
+;   hl: source address
+mem_CopyMono:
 	inc		b
 	inc		c
 	jr		.skip
 .loop
-	ld		a,[hl+]
-	ld		[de],a
+	ld		a, [hl+]
+	ld		[de], a
 	inc		de
-	ld		[de],a
+	ld		[de], a
 	inc		de
 .skip
 	dec		c
@@ -486,7 +483,7 @@ memfill:
 	inc		c
 	jr		.skip
 .loop
-	ld		[hl+],a
+	ld		[hl+], a
 .skip
 	dec		c
 	jr		nz, .loop
@@ -494,9 +491,9 @@ memfill:
 	jr		nz, .loop
 	ret
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  SPRITE FILES ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Sprites
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Tiles:
 	INCLUDE "maintiles.z80"
@@ -514,11 +511,10 @@ Text:
 	INCLUDE "text.inc"
 TextEnd:
 
+Text2:
+	INCLUDE "text2.inc"
+TextEnd:
+
 FontData:
 	chr_IBMPC1
 EndFontData:
-
-; End Screen
-; EndScreen:
-; INCLUDE"endscreen.z80"
-; EndEndScreen:
