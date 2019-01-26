@@ -93,6 +93,11 @@ scrollY					RB 1
 
 currentScreen			RB 1	;What screen are we on
 
+tileBytesToLoadHigh		RB 1	;What tiles to load on the next VBlank
+tileBytesToLoadLow		RB 1
+tileBytestoLoadSizeHigh	RB 1
+tileBytestoLoadSizeLow	RB 1
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RSSET _RAM_BLOCK_0 + 96
 _RAM_BLOCK_1			RB 0
@@ -290,57 +295,37 @@ _BLACK EQU %0000000000000000
 	ld		[rLCDC], a
 	
 ;Clear local variables
-	;ld a, 0
-	
+	ld a, _CHOOSE_STORY
 	ld [currentScreen], a
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 GameLoop:
 
-
-;Determine what screen to show and process
-.testGameMode:
-	ld		a, [currentScreen]
+;LoadTiles cleanup, so we don't load tiles every frame
+.loadTilesCleanup:
+	ld a, 0
+	ld [TileBytesToCopySizeHigh], a
+	ld [TileBytesToCopySizeLow], a
 	
-	cp 		_INTRO
-	jp 		z, .screenIntro
 	
-	cp 		_OUTRO
-	jp 		z, .screenOutro
 	
-	cp		_READ_CARD
-	jp 		z, .screenReadCard
-	
-	cp		_READ_STORY
-	jp 		z, .screenReadStory
-	
-	cp		_CHOOSE_CARD
-	jp 		z, .screenChooseCard
-	
-	cp		_CHOOSE_STORY
-	jp 		z, .screenChooseStory
-	
-	stop	;Catch invalid game mode
-	
-;Code for various game screens
-.screenIntro:
-	jp .doneScreen
-.screenOutro:
-	jp .doneScreen
-.screenReadCard:
-	jp .doneScreen
-.screenReadStory:
-	jp .doneScreen
-.screenChooseCard:
-	jp .doneScreen
-.screenChooseStory:
-	jp .doneScreen
-
-	
-.doneScreen	
 	call	ShowWindow
 	call	ReadPad
+	
+	
 
+;Pre-VBlank Load variables for when VBlank is done
+.loadTilesPrep:
+	ld a, [tileBytesToLoadSizeHigh]
+	ld b, a
+	ld a, [tileBytesToLoadSizeLow]
+	ld c, a
+	ld a, [tileBytesToLoadHigh]
+	ld h, a
+	ld a, [tileBytesToLoadLow]
+	ld l, a
+	ld de, _VRAM
+	
 .waitForVBlank:
 	ld		a, [rLY]
 	cp		144
@@ -348,7 +333,16 @@ GameLoop:
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; start VRAM dependent code
-
+	
+	;Check if there are any bytes to copy, if not, bail
+.testLoadTiles:
+	ld a, b
+	or c
+	jp z, .doneLoadTiles
+.loadTiles:
+	call memcpy
+.doneLoadTiles:	
+	
 	; set camera scroll position
 	ld		a, [scrollX]
 	ld		[rSCX], a
@@ -364,9 +358,11 @@ GameLoop:
 	ld		a, [rLY]
 	cp		144
 	jr		nc, .waitForNotVBlank
-
+		
 	jr		GameLoop
-
+	
+	;END MAIN LOOP
+	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; read button state into [padInput]
 ReadPad:
