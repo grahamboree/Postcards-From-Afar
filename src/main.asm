@@ -513,7 +513,7 @@ TextEnd:
 
 Text2:
 	INCLUDE "text2.inc"
-TextEnd:
+Text2End:
 
 FontData:
 	chr_IBMPC1
