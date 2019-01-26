@@ -13,7 +13,9 @@ char_list = [
 #with open(text_file) as f:
 #    text = f.read()
 
-text = "This is a second page of text that is different from the first and needs to be paginated!"
+text = "You start your trip in southern Africa. The first place you stop is Swakopmund. Here, you get to ride a quad bike through all the sand dunes. Being surrounded by sand for miles creates an almost otherworldly feel, almost like you're on Mars."
+
+text.replace('  ', ' ')
 
 # screen is 20x18 but we want a border
 max_width = 20

@@ -111,6 +111,7 @@ isWindowVisible			RB 1
 wantWindowVisible		RB 1
 
 currentTextPage			RB 1
+desiredTextPage			RB 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RSSET _RAM_BLOCK_1 + 128
@@ -266,6 +267,9 @@ _BLACK EQU %0000000000000000
 	; copy tile map to VRAM
 	call	CopyTileMap
 
+	ld		a, 0
+	ld		[desiredTextPage], a
+
 	; copy window tile map
 	ld		hl, Text
 	ld		de, _SCRN1			; map 1 location
@@ -362,6 +366,7 @@ GameLoop:
 	ld		[rSCY], a
 
 	call	UpdateWindowVisibility
+	call	UpdateTextMap
 	call	$FF80 ; Call DMA Copy routine
 
 	; end VRAM dependent code
@@ -507,6 +512,45 @@ DetectPadEvents:
 
 	ret
 	
+	ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+UpdateTextMap:
+	ld		a, [currentTextPage]
+	ld		b, a
+	ld		a, [desiredTextPage]
+	cp		b
+
+	ret		z	; already on the correct page
+	
+	cp		0
+	jr		z, .Text2
+
+.Text1:
+	ld		[currentTextPage], a
+
+	ld		hl, Text
+	jr		.Copy
+
+.Text2:
+	ld		[currentTextPage], a
+
+	ld		hl, Text2
+
+.Copy:
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+
+	ld		de, _SCRN1			; map 1 location
+	ld		bc, 32 * 32			; screen size
+	call 	memcpy
+	
+	pop		af
+	ld		[rLCDC], a
+
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
