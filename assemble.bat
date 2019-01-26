@@ -17,13 +17,13 @@ cmd /c makelnk %1 > obj\%1.link
 :begin
 set assemble=1
 echo assembling...
-rgbasm -iinc\ -oobj\%1.obj src\%1.asm
+rgbasm -E -iinc\ -oobj\%1.obj src\%1.asm
 if errorlevel 1 goto end
 echo linking...
-rgblink -o obj\%1.gb  obj\%1.obj
+rgblink -o obj\%1.gb -n obj\%1.sym obj\%1.obj
 if errorlevel 1 goto end
 echo fixing...
-rgbfix -v -p 0 obj\%1.gb
+rgbfix -v obj\%1.gb
 
 :end
 rem del *.obj
