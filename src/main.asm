@@ -445,29 +445,27 @@ ShowWindow:
 	ld		[rWY], a	; window y location
 
 	; activate windows and deactivate sprites
-	ld		a, [rLCDC]		; load LCD control contents
-	or		LCDCF_WINON		; check if window is on
-	xor		LCDCF_BGOFF		; turn off background
-	xor		LCDCF_OBJOFF	; turn off sprites
-	res		1, a			; bit 1 to 0
-	ld		[rLCDC], a
+	ld		hl, rLCDC
+	ld		a, [hl]		; load LCD control contents
+	set		5, a			; turn on window
+	res		0, a			; turn off background
+	res		1, a			; turn off sprites
+	ld		[hl], a
 
-.CheckExit
-	call	ReadPad
-	and		%00001000	; start button
-	jr		z, .CheckExit
+	ret
 
 .CloseWindow
-	; turn off start screen toggle
-	ld		a, 5
-	ld		[windowToggle], a
+	ld		a, 0
+	ld		[isWindowVisible], a
 
 	; deactivate the window and activate the sprites
-	ld		a, [rLCDC]
-	res		5, a			; reset window sprites to 0
-	or		LCDCF_OBJON		; turn on objects
-	or		LCDCF_BGON		; turn off background
-	ld		[rLCDC], a		; apply changes
+	ld		hl, rLCDC
+	ld		a, [hl]		; load LCD control contents
+	res		5, a			; turn off window
+	set		0, a			; turn on background
+	set		1, a			; turn on sprites
+	ld		[hl], a
+
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
