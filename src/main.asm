@@ -333,43 +333,10 @@ GameLoop:
 .doneTilesCleanup:	
 	call	ReadPad
 	call	DetectPadEvents
-	
-	;Temp Code : pyramids and scuba toggle
-	
-	ld a, [padDown]
-	cp 0
-	jp z, .doNotLoad
-	
-	ld a, [isPyramidsLoaded]
-	cp 0
-	jp nz, .loadAirplane
-	
-	call LoadPyramids
-	ld a, 1
-	ld [isPyramidsLoaded], a
-	jp .doNotLoad
-	
-.loadAirplane
-	call LoadAirplane
-	ld a, 0
-	ld [isPyramidsLoaded], a
-	jp .doNotLoad
-	
-	;End Temp Code
-	
-.doNotLoad:	
+	call 	GregTempCode
 	
 ;Pre-VBlank Load variables for when VBlank is done
-.loadTilesPrep:
-	ld a, [tileBytesToLoadSizeHigh]
-	ld b, a
-	ld a, [tileBytesToLoadSizeLow]
-	ld c, a
-	ld a, [tileBytesToLoadHigh]
-	ld h, a
-	ld a, [tileBytesToLoadLow]
-	ld l, a
-	ld de, _VRAM
+	call PreVBlank
 	
 .waitForVBlank:
 	ld		a, [rLY]
@@ -411,6 +378,49 @@ GameLoop:
 	
 ;;Gameplay content loading commands
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Temp main loop code:
+GregTempCode:
+	;Temp Code : pyramids and scuba toggle
+	
+	ld a, [padDown]
+	cp 0
+	jp z, .doNotLoad
+	
+	ld a, [isPyramidsLoaded]
+	cp 0
+	jp nz, .loadAirplane
+	
+	call LoadPyramids
+	ld a, 1
+	ld [isPyramidsLoaded], a
+	jp .doNotLoad
+	
+.loadAirplane
+	call LoadAirplane
+	ld a, 0
+	ld [isPyramidsLoaded], a
+	jp .doNotLoad
+	
+.doNotLoad:
+	ret
+	;End Temp Code
+	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Code to save cycles in VBlank. Must be executed immediately before the VBlank check in main loop.
+PreVBlank:
+.loadTilesPrep:
+	ld a, [tileBytesToLoadSizeHigh]
+	ld b, a
+	ld a, [tileBytesToLoadSizeLow]
+	ld c, a
+	ld a, [tileBytesToLoadHigh]
+	ld h, a
+	ld a, [tileBytesToLoadLow]
+	ld l, a
+	ld de, _VRAM
+	ret
+	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Load the various large images on VBlank, and do any other scene-transition work
 LoadPyramids:
