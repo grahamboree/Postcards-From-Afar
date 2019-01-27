@@ -18,7 +18,7 @@ IslandLabelWidth  EQU 20
 IslandLabelHeight EQU 18
 IslandLabelBank   EQU 1
 
- SECTION "IslandSection", DATA, BANK[1]
+ SECTION "IslandSection", ROMX, BANK[1]
 
 IslandLabel::
 IslandLabelPLN0::

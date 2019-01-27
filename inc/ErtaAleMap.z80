@@ -18,7 +18,7 @@ ErtaAleLabelWidth  EQU 20
 ErtaAleLabelHeight EQU 18
 ErtaAleLabelBank   EQU 1
 
- SECTION "ErtaAleSection", DATA, BANK[1]
+ SECTION "ErtaAleSection", ROMX, BANK[1]
 
 ErtaAleLabel::
 ErtaAleLabelPLN0::

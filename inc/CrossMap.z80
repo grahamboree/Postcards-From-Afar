@@ -18,7 +18,7 @@ CrossLabelWidth  EQU 20
 CrossLabelHeight EQU 18
 CrossLabelBank   EQU 1
 
- SECTION "CrossSection", DATA, BANK[1]
+ SECTION "CrossSection", ROMX, BANK[1]
 
 CrossLabel::
 CrossLabelPLN0::

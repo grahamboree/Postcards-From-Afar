@@ -18,7 +18,7 @@ SandDunesLabelWidth  EQU 20
 SandDunesLabelHeight EQU 18
 SandDunesLabelBank   EQU 1
 
- SECTION "SandDunesSection", DATA, BANK[1]
+ SECTION "SandDunesSection", ROMX, BANK[1]
 
 SandDunesLabel::
 SandDunesLabelPLN0::

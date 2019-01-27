@@ -18,7 +18,7 @@ FallsLabelWidth  EQU 20
 FallsLabelHeight EQU 18
 FallsLabelBank   EQU 1
 
- SECTION "FallsSection", DATA, BANK[1]
+ SECTION "FallsSection", ROMX, BANK[1]
 
 FallsLabel::
 FallsLabelPLN0::

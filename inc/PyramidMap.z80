@@ -18,7 +18,7 @@ PyramidLabelWidth  EQU 20
 PyramidLabelHeight EQU 18
 PyramidLabelBank   EQU 1
 
- SECTION "PyramidSection", DATA, BANK[1]
+ SECTION "PyramidSection", ROMX, BANK[1]
 
 PyramidLabel::
 PyramidLabelPLN0::

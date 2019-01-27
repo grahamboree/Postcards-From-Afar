@@ -18,7 +18,7 @@ AirplaneWindowLabelWidth  EQU 20
 AirplaneWindowLabelHeight EQU 18
 AirplaneWindowLabelBank   EQU 1
 
- SECTION "AirplaneWindowSection", DATA, BANK[1]
+ SECTION "AirplaneWindowSection", ROMX, BANK[1]
 
 AirplaneWindowLabel::
 AirplaneWindowLabelPLN0::

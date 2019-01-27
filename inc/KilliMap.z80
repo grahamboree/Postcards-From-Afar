@@ -18,7 +18,7 @@ KilliLabelWidth  EQU 20
 KilliLabelHeight EQU 18
 KilliLabelBank   EQU 1
 
- SECTION "KilliSection", DATA, BANK[1]
+ SECTION "KilliSection", ROMX, BANK[1]
 
 KilliLabel::
 KilliLabelPLN0::
