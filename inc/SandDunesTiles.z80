@@ -68,5 +68,5 @@ DB $00,$FF,$03,$FF,$03,$FF,$03,$FF
 DB $03,$FF,$01,$FF,$80,$FF,$FE,$FF
 DB $55,$55,$AA,$AA,$55,$55,$0A,$0A
 DB $04,$04,$00,$00,$00,$00,$00,$00
-SandDuneTilesEnd:
+SandDunesTilesEnd:
 ; End of SANDDUNESTILES.Z80
