@@ -25,113 +25,113 @@
 ScubeTilesBank EQU 0
 
 ; Super Gameboy palette 0
-ScubeTilesSGBPal0c0 EQU 6076
-ScubeTilesSGBPal0c1 EQU 8935
-ScubeTilesSGBPal0c2 EQU 6596
-ScubeTilesSGBPal0c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 1
-ScubeTilesSGBPal1c0 EQU 6076
-ScubeTilesSGBPal1c1 EQU 8935
-ScubeTilesSGBPal1c2 EQU 6596
-ScubeTilesSGBPal1c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 2
-ScubeTilesSGBPal2c0 EQU 6076
-ScubeTilesSGBPal2c1 EQU 8935
-ScubeTilesSGBPal2c2 EQU 6596
-ScubeTilesSGBPal2c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 3
-ScubeTilesSGBPal3c0 EQU 6076
-ScubeTilesSGBPal3c1 EQU 8935
-ScubeTilesSGBPal3c2 EQU 6596
-ScubeTilesSGBPal3c3 EQU 5344
+
+
+
+
 
 ; Gameboy Color palette 0
-ScubeTilesCGBPal0c0 EQU 31540
-ScubeTilesCGBPal0c1 EQU 28172
-ScubeTilesCGBPal0c2 EQU 23910
-ScubeTilesCGBPal0c3 EQU 14565
+DW 31540
+DW 28172
+DW 23910
+DW 14565
 
 ; Gameboy Color palette 1
-ScubeTilesCGBPal1c0 EQU 12483
-ScubeTilesCGBPal1c1 EQU 28172
-ScubeTilesCGBPal1c2 EQU 23910
-ScubeTilesCGBPal1c3 EQU 14565
+DW 12483
+DW 28172
+DW 23910
+DW 14565
 
 ; Gameboy Color palette 2
-ScubeTilesCGBPal2c0 EQU 6076
-ScubeTilesCGBPal2c1 EQU 8935
-ScubeTilesCGBPal2c2 EQU 6596
-ScubeTilesCGBPal2c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 3
-ScubeTilesCGBPal3c0 EQU 6076
-ScubeTilesCGBPal3c1 EQU 8935
-ScubeTilesCGBPal3c2 EQU 6596
-ScubeTilesCGBPal3c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 4
-ScubeTilesCGBPal4c0 EQU 6076
-ScubeTilesCGBPal4c1 EQU 8935
-ScubeTilesCGBPal4c2 EQU 6596
-ScubeTilesCGBPal4c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 5
-ScubeTilesCGBPal5c0 EQU 6076
-ScubeTilesCGBPal5c1 EQU 8935
-ScubeTilesCGBPal5c2 EQU 6596
-ScubeTilesCGBPal5c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 6
-ScubeTilesCGBPal6c0 EQU 6076
-ScubeTilesCGBPal6c1 EQU 8935
-ScubeTilesCGBPal6c2 EQU 6596
-ScubeTilesCGBPal6c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 7
-ScubeTilesCGBPal7c0 EQU 6076
-ScubeTilesCGBPal7c1 EQU 8935
-ScubeTilesCGBPal7c2 EQU 6596
-ScubeTilesCGBPal7c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; CGB palette entries.
-ScubeTilesCGB0 EQU 0
-ScubeTilesCGB1 EQU 0
-ScubeTilesCGB2 EQU 0
-ScubeTilesCGB3 EQU 1
-ScubeTilesCGB4 EQU 0
-ScubeTilesCGB5 EQU 0
-ScubeTilesCGB6 EQU 0
-ScubeTilesCGB7 EQU 0
-ScubeTilesCGB8 EQU 0
-ScubeTilesCGB9 EQU 0
-ScubeTilesCGB10 EQU 0
-ScubeTilesCGB11 EQU 0
-ScubeTilesCGB12 EQU 0
-ScubeTilesCGB13 EQU 0
-ScubeTilesCGB14 EQU 0
-ScubeTilesCGB15 EQU 0
-ScubeTilesCGB16 EQU 0
-ScubeTilesCGB17 EQU 0
-ScubeTilesCGB18 EQU 0
-ScubeTilesCGB19 EQU 0
-ScubeTilesCGB20 EQU 0
-ScubeTilesCGB21 EQU 0
-ScubeTilesCGB22 EQU 0
-ScubeTilesCGB23 EQU 0
-ScubeTilesCGB24 EQU 0
-ScubeTilesCGB25 EQU 0
-ScubeTilesCGB26 EQU 0
-ScubeTilesCGB27 EQU 0
-ScubeTilesCGB28 EQU 1
-ScubeTilesCGB29 EQU 0
-ScubeTilesCGB30 EQU 1
-ScubeTilesCGB31 EQU 0
-ScubeTilesCGB32 EQU 0
-ScubeTilesCGB33 EQU 0
-ScubeTilesCGB34 EQU 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ; Start of tile array.
  GLOBAL ScubeTiles

@@ -25,115 +25,115 @@
 FallsLabelBank EQU 1
 
 ; Super Gameboy palette 0
-FallsLabelSGBPal0c0 EQU 6076
-FallsLabelSGBPal0c1 EQU 8935
-FallsLabelSGBPal0c2 EQU 6596
-FallsLabelSGBPal0c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 1
-FallsLabelSGBPal1c0 EQU 6076
-FallsLabelSGBPal1c1 EQU 8935
-FallsLabelSGBPal1c2 EQU 6596
-FallsLabelSGBPal1c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 2
-FallsLabelSGBPal2c0 EQU 6076
-FallsLabelSGBPal2c1 EQU 8935
-FallsLabelSGBPal2c2 EQU 6596
-FallsLabelSGBPal2c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 3
-FallsLabelSGBPal3c0 EQU 6076
-FallsLabelSGBPal3c1 EQU 8935
-FallsLabelSGBPal3c2 EQU 6596
-FallsLabelSGBPal3c3 EQU 5344
+
+
+
+
 
 ; Gameboy Color palette 0
-FallsLabelCGBPal0c0 EQU 30286
-FallsLabelCGBPal0c1 EQU 31409
-FallsLabelCGBPal0c2 EQU 22364
-FallsLabelCGBPal0c3 EQU 32767
+DW 30286
+DW 31409
+DW 22364
+DW 32767
 
 ; Gameboy Color palette 1
-FallsLabelCGBPal1c0 EQU 23123
-FallsLabelCGBPal1c1 EQU 31409
-FallsLabelCGBPal1c2 EQU 22334
-FallsLabelCGBPal1c3 EQU 32767
+DW 23123
+DW 31409
+DW 22334
+DW 32767
 
 ; Gameboy Color palette 2
-FallsLabelCGBPal2c0 EQU 6076
-FallsLabelCGBPal2c1 EQU 8935
-FallsLabelCGBPal2c2 EQU 6596
-FallsLabelCGBPal2c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 3
-FallsLabelCGBPal3c0 EQU 6076
-FallsLabelCGBPal3c1 EQU 8935
-FallsLabelCGBPal3c2 EQU 6596
-FallsLabelCGBPal3c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 4
-FallsLabelCGBPal4c0 EQU 6076
-FallsLabelCGBPal4c1 EQU 8935
-FallsLabelCGBPal4c2 EQU 6596
-FallsLabelCGBPal4c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 5
-FallsLabelCGBPal5c0 EQU 6076
-FallsLabelCGBPal5c1 EQU 8935
-FallsLabelCGBPal5c2 EQU 6596
-FallsLabelCGBPal5c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 6
-FallsLabelCGBPal6c0 EQU 6076
-FallsLabelCGBPal6c1 EQU 8935
-FallsLabelCGBPal6c2 EQU 6596
-FallsLabelCGBPal6c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 7
-FallsLabelCGBPal7c0 EQU 6076
-FallsLabelCGBPal7c1 EQU 8935
-FallsLabelCGBPal7c2 EQU 6596
-FallsLabelCGBPal7c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; CGB palette entries.
-FallsLabelCGB0 EQU 0
-FallsLabelCGB1 EQU 0
-FallsLabelCGB2 EQU 0
-FallsLabelCGB3 EQU 0
-FallsLabelCGB4 EQU 1
-FallsLabelCGB5 EQU 1
-FallsLabelCGB6 EQU 0
-FallsLabelCGB7 EQU 0
-FallsLabelCGB8 EQU 0
-FallsLabelCGB9 EQU 0
-FallsLabelCGB10 EQU 0
-FallsLabelCGB11 EQU 0
-FallsLabelCGB12 EQU 0
-FallsLabelCGB13 EQU 0
-FallsLabelCGB14 EQU 0
-FallsLabelCGB15 EQU 0
-FallsLabelCGB16 EQU 0
-FallsLabelCGB17 EQU 0
-FallsLabelCGB18 EQU 0
-FallsLabelCGB19 EQU 0
-FallsLabelCGB20 EQU 0
-FallsLabelCGB21 EQU 0
-FallsLabelCGB22 EQU 0
-FallsLabelCGB23 EQU 0
-FallsLabelCGB24 EQU 0
-FallsLabelCGB25 EQU 0
-FallsLabelCGB26 EQU 0
-FallsLabelCGB27 EQU 0
-FallsLabelCGB28 EQU 0
-FallsLabelCGB29 EQU 0
-FallsLabelCGB30 EQU 0
-FallsLabelCGB31 EQU 0
-FallsLabelCGB32 EQU 0
-FallsLabelCGB33 EQU 0
-FallsLabelCGB34 EQU 0
-FallsLabelCGB35 EQU 0
-FallsLabelCGB36 EQU 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ; Start of tile array.
  GLOBAL FallsLabel

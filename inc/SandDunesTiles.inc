@@ -25,100 +25,100 @@
 SandDunesLabelBank EQU 1
 
 ; Super Gameboy palette 0
-SandDunesLabelSGBPal0c0 EQU 6076
-SandDunesLabelSGBPal0c1 EQU 8935
-SandDunesLabelSGBPal0c2 EQU 6596
-SandDunesLabelSGBPal0c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 1
-SandDunesLabelSGBPal1c0 EQU 6076
-SandDunesLabelSGBPal1c1 EQU 8935
-SandDunesLabelSGBPal1c2 EQU 6596
-SandDunesLabelSGBPal1c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 2
-SandDunesLabelSGBPal2c0 EQU 6076
-SandDunesLabelSGBPal2c1 EQU 8935
-SandDunesLabelSGBPal2c2 EQU 6596
-SandDunesLabelSGBPal2c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 3
-SandDunesLabelSGBPal3c0 EQU 6076
-SandDunesLabelSGBPal3c1 EQU 8935
-SandDunesLabelSGBPal3c2 EQU 6596
-SandDunesLabelSGBPal3c3 EQU 5344
+
+
+
+
 
 ; Gameboy Color palette 0
-SandDunesLabelCGBPal0c0 EQU 26423
-SandDunesLabelCGBPal0c1 EQU 28537
-SandDunesLabelCGBPal0c2 EQU 31510
-SandDunesLabelCGBPal0c3 EQU 26492
+DW 26423
+DW 28537
+DW 31510
+DW 26492
 
 ; Gameboy Color palette 1
-SandDunesLabelCGBPal1c0 EQU 27315
-SandDunesLabelCGBPal1c1 EQU 28537
-SandDunesLabelCGBPal1c2 EQU 31510
-SandDunesLabelCGBPal1c3 EQU 26492
+DW 27315
+DW 28537
+DW 31510
+DW 26492
 
 ; Gameboy Color palette 2
-SandDunesLabelCGBPal2c0 EQU 6076
-SandDunesLabelCGBPal2c1 EQU 8935
-SandDunesLabelCGBPal2c2 EQU 6596
-SandDunesLabelCGBPal2c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 3
-SandDunesLabelCGBPal3c0 EQU 6076
-SandDunesLabelCGBPal3c1 EQU 8935
-SandDunesLabelCGBPal3c2 EQU 6596
-SandDunesLabelCGBPal3c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 4
-SandDunesLabelCGBPal4c0 EQU 6076
-SandDunesLabelCGBPal4c1 EQU 8935
-SandDunesLabelCGBPal4c2 EQU 6596
-SandDunesLabelCGBPal4c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 5
-SandDunesLabelCGBPal5c0 EQU 6076
-SandDunesLabelCGBPal5c1 EQU 8935
-SandDunesLabelCGBPal5c2 EQU 6596
-SandDunesLabelCGBPal5c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 6
-SandDunesLabelCGBPal6c0 EQU 6076
-SandDunesLabelCGBPal6c1 EQU 8935
-SandDunesLabelCGBPal6c2 EQU 6596
-SandDunesLabelCGBPal6c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 7
-SandDunesLabelCGBPal7c0 EQU 6076
-SandDunesLabelCGBPal7c1 EQU 8935
-SandDunesLabelCGBPal7c2 EQU 6596
-SandDunesLabelCGBPal7c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; CGB palette entries.
-SandDunesLabelCGB0 EQU 0
-SandDunesLabelCGB1 EQU 0
-SandDunesLabelCGB2 EQU 0
-SandDunesLabelCGB3 EQU 0
-SandDunesLabelCGB4 EQU 1
-SandDunesLabelCGB5 EQU 0
-SandDunesLabelCGB6 EQU 0
-SandDunesLabelCGB7 EQU 0
-SandDunesLabelCGB8 EQU 0
-SandDunesLabelCGB9 EQU 0
-SandDunesLabelCGB10 EQU 0
-SandDunesLabelCGB11 EQU 0
-SandDunesLabelCGB12 EQU 0
-SandDunesLabelCGB13 EQU 0
-SandDunesLabelCGB14 EQU 0
-SandDunesLabelCGB15 EQU 0
-SandDunesLabelCGB16 EQU 0
-SandDunesLabelCGB17 EQU 0
-SandDunesLabelCGB18 EQU 0
-SandDunesLabelCGB19 EQU 0
-SandDunesLabelCGB20 EQU 0
-SandDunesLabelCGB21 EQU 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ; Start of tile array.
  GLOBAL SandDunesLabel

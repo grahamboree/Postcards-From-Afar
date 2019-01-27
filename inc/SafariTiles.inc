@@ -25,105 +25,105 @@
 SafariLabelBank EQU 1
 
 ; Super Gameboy palette 0
-SafariLabelSGBPal0c0 EQU 6076
-SafariLabelSGBPal0c1 EQU 8935
-SafariLabelSGBPal0c2 EQU 6596
-SafariLabelSGBPal0c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 1
-SafariLabelSGBPal1c0 EQU 6076
-SafariLabelSGBPal1c1 EQU 8935
-SafariLabelSGBPal1c2 EQU 6596
-SafariLabelSGBPal1c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 2
-SafariLabelSGBPal2c0 EQU 6076
-SafariLabelSGBPal2c1 EQU 8935
-SafariLabelSGBPal2c2 EQU 6596
-SafariLabelSGBPal2c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 3
-SafariLabelSGBPal3c0 EQU 6076
-SafariLabelSGBPal3c1 EQU 8935
-SafariLabelSGBPal3c2 EQU 6596
-SafariLabelSGBPal3c3 EQU 5344
+
+
+
+
 
 ; Gameboy Color palette 0
-SafariLabelCGBPal0c0 EQU 26462
-SafariLabelCGBPal0c1 EQU 22270
-SafariLabelCGBPal0c2 EQU 21017
-SafariLabelCGBPal0c3 EQU 18932
+DW 26462
+DW 22270
+DW 21017
+DW 18932
 
 ; Gameboy Color palette 1
-SafariLabelCGBPal1c0 EQU 21077
-SafariLabelCGBPal1c1 EQU 16849
-SafariLabelCGBPal1c2 EQU 21017
-SafariLabelCGBPal1c3 EQU 18932
+DW 21077
+DW 16849
+DW 21017
+DW 18932
 
 ; Gameboy Color palette 2
-SafariLabelCGBPal2c0 EQU 6076
-SafariLabelCGBPal2c1 EQU 8935
-SafariLabelCGBPal2c2 EQU 6596
-SafariLabelCGBPal2c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 3
-SafariLabelCGBPal3c0 EQU 6076
-SafariLabelCGBPal3c1 EQU 8935
-SafariLabelCGBPal3c2 EQU 6596
-SafariLabelCGBPal3c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 4
-SafariLabelCGBPal4c0 EQU 6076
-SafariLabelCGBPal4c1 EQU 8935
-SafariLabelCGBPal4c2 EQU 6596
-SafariLabelCGBPal4c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 5
-SafariLabelCGBPal5c0 EQU 6076
-SafariLabelCGBPal5c1 EQU 8935
-SafariLabelCGBPal5c2 EQU 6596
-SafariLabelCGBPal5c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 6
-SafariLabelCGBPal6c0 EQU 6076
-SafariLabelCGBPal6c1 EQU 8935
-SafariLabelCGBPal6c2 EQU 6596
-SafariLabelCGBPal6c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 7
-SafariLabelCGBPal7c0 EQU 6076
-SafariLabelCGBPal7c1 EQU 8935
-SafariLabelCGBPal7c2 EQU 6596
-SafariLabelCGBPal7c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; CGB palette entries.
-SafariLabelCGB0 EQU 0
-SafariLabelCGB1 EQU 0
-SafariLabelCGB2 EQU 0
-SafariLabelCGB3 EQU 0
-SafariLabelCGB4 EQU 1
-SafariLabelCGB5 EQU 1
-SafariLabelCGB6 EQU 0
-SafariLabelCGB7 EQU 0
-SafariLabelCGB8 EQU 0
-SafariLabelCGB9 EQU 0
-SafariLabelCGB10 EQU 0
-SafariLabelCGB11 EQU 0
-SafariLabelCGB12 EQU 0
-SafariLabelCGB13 EQU 0
-SafariLabelCGB14 EQU 0
-SafariLabelCGB15 EQU 0
-SafariLabelCGB16 EQU 0
-SafariLabelCGB17 EQU 0
-SafariLabelCGB18 EQU 0
-SafariLabelCGB19 EQU 0
-SafariLabelCGB20 EQU 0
-SafariLabelCGB21 EQU 0
-SafariLabelCGB22 EQU 0
-SafariLabelCGB23 EQU 0
-SafariLabelCGB24 EQU 1
-SafariLabelCGB25 EQU 1
-SafariLabelCGB26 EQU 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ; Start of tile array.
  GLOBAL SafariLabel

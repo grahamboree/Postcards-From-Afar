@@ -25,104 +25,104 @@
 ErtaAleLabelBank EQU 0
 
 ; Super Gameboy palette 0
-ErtaAleLabelSGBPal0c0 EQU 6076
-ErtaAleLabelSGBPal0c1 EQU 8935
-ErtaAleLabelSGBPal0c2 EQU 6596
-ErtaAleLabelSGBPal0c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 1
-ErtaAleLabelSGBPal1c0 EQU 6076
-ErtaAleLabelSGBPal1c1 EQU 8935
-ErtaAleLabelSGBPal1c2 EQU 6596
-ErtaAleLabelSGBPal1c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 2
-ErtaAleLabelSGBPal2c0 EQU 6076
-ErtaAleLabelSGBPal2c1 EQU 8935
-ErtaAleLabelSGBPal2c2 EQU 6596
-ErtaAleLabelSGBPal2c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 3
-ErtaAleLabelSGBPal3c0 EQU 6076
-ErtaAleLabelSGBPal3c1 EQU 8935
-ErtaAleLabelSGBPal3c2 EQU 6596
-ErtaAleLabelSGBPal3c3 EQU 5344
+
+
+
+
 
 ; Gameboy Color palette 0
-ErtaAleLabelCGBPal0c0 EQU 29495
-ErtaAleLabelCGBPal0c1 EQU 26291
-ErtaAleLabelCGBPal0c2 EQU 6274
-ErtaAleLabelCGBPal0c3 EQU 7332
+DW 29495
+DW 26291
+DW 6274
+DW 7332
 
 ; Gameboy Color palette 1
-ErtaAleLabelCGBPal1c0 EQU 16287
-ErtaAleLabelCGBPal1c1 EQU 10814
-ErtaAleLabelCGBPal1c2 EQU 6274
-ErtaAleLabelCGBPal1c3 EQU 7332
+DW 16287
+DW 10814
+DW 6274
+DW 7332
 
 ; Gameboy Color palette 2
-ErtaAleLabelCGBPal2c0 EQU 6076
-ErtaAleLabelCGBPal2c1 EQU 8935
-ErtaAleLabelCGBPal2c2 EQU 6596
-ErtaAleLabelCGBPal2c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 3
-ErtaAleLabelCGBPal3c0 EQU 6076
-ErtaAleLabelCGBPal3c1 EQU 8935
-ErtaAleLabelCGBPal3c2 EQU 6596
-ErtaAleLabelCGBPal3c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 4
-ErtaAleLabelCGBPal4c0 EQU 6076
-ErtaAleLabelCGBPal4c1 EQU 8935
-ErtaAleLabelCGBPal4c2 EQU 6596
-ErtaAleLabelCGBPal4c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 5
-ErtaAleLabelCGBPal5c0 EQU 6076
-ErtaAleLabelCGBPal5c1 EQU 8935
-ErtaAleLabelCGBPal5c2 EQU 6596
-ErtaAleLabelCGBPal5c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 6
-ErtaAleLabelCGBPal6c0 EQU 6076
-ErtaAleLabelCGBPal6c1 EQU 8935
-ErtaAleLabelCGBPal6c2 EQU 6596
-ErtaAleLabelCGBPal6c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 7
-ErtaAleLabelCGBPal7c0 EQU 6076
-ErtaAleLabelCGBPal7c1 EQU 8935
-ErtaAleLabelCGBPal7c2 EQU 6596
-ErtaAleLabelCGBPal7c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; CGB palette entries.
-ErtaAleLabelCGB0 EQU 0
-ErtaAleLabelCGB1 EQU 0
-ErtaAleLabelCGB2 EQU 0
-ErtaAleLabelCGB3 EQU 0
-ErtaAleLabelCGB4 EQU 0
-ErtaAleLabelCGB5 EQU 0
-ErtaAleLabelCGB6 EQU 0
-ErtaAleLabelCGB7 EQU 0
-ErtaAleLabelCGB8 EQU 0
-ErtaAleLabelCGB9 EQU 0
-ErtaAleLabelCGB10 EQU 0
-ErtaAleLabelCGB11 EQU 0
-ErtaAleLabelCGB12 EQU 0
-ErtaAleLabelCGB13 EQU 0
-ErtaAleLabelCGB14 EQU 0
-ErtaAleLabelCGB15 EQU 0
-ErtaAleLabelCGB16 EQU 0
-ErtaAleLabelCGB17 EQU 0
-ErtaAleLabelCGB18 EQU 0
-ErtaAleLabelCGB19 EQU 0
-ErtaAleLabelCGB20 EQU 0
-ErtaAleLabelCGB21 EQU 0
-ErtaAleLabelCGB22 EQU 1
-ErtaAleLabelCGB23 EQU 1
-ErtaAleLabelCGB24 EQU 1
-ErtaAleLabelCGB25 EQU 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ; Start of tile array.
  GLOBAL ErtaAleLabel

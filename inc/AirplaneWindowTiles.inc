@@ -25,178 +25,178 @@
 TileLabelBank EQU 1
 
 ; Super Gameboy palette 0
-TileLabelSGBPal0c0 EQU 6076
-TileLabelSGBPal0c1 EQU 8935
-TileLabelSGBPal0c2 EQU 6596
-TileLabelSGBPal0c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 1
-TileLabelSGBPal1c0 EQU 6076
-TileLabelSGBPal1c1 EQU 8935
-TileLabelSGBPal1c2 EQU 6596
-TileLabelSGBPal1c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 2
-TileLabelSGBPal2c0 EQU 6076
-TileLabelSGBPal2c1 EQU 8935
-TileLabelSGBPal2c2 EQU 6596
-TileLabelSGBPal2c3 EQU 5344
+
+
+
+
 
 ; Super Gameboy palette 3
-TileLabelSGBPal3c0 EQU 6076
-TileLabelSGBPal3c1 EQU 8935
-TileLabelSGBPal3c2 EQU 6596
-TileLabelSGBPal3c3 EQU 5344
+
+
+
+
 
 ; Gameboy Color palette 0
-TileLabelCGBPal0c0 EQU 32597
-TileLabelCGBPal0c1 EQU 32665
-TileLabelCGBPal0c2 EQU 28336
-TileLabelCGBPal0c3 EQU 22984
+DW 32597
+DW 32665
+DW 28336
+DW 22984
 
 ; Gameboy Color palette 1
-TileLabelCGBPal1c0 EQU 32767
-TileLabelCGBPal1c1 EQU 32597
-TileLabelCGBPal1c2 EQU 29359
-TileLabelCGBPal1c3 EQU 32665
+DW 32767
+DW 32597
+DW 29359
+DW 32665
 
 ; Gameboy Color palette 2
-TileLabelCGBPal2c0 EQU 6076
-TileLabelCGBPal2c1 EQU 8935
-TileLabelCGBPal2c2 EQU 6596
-TileLabelCGBPal2c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 3
-TileLabelCGBPal3c0 EQU 6076
-TileLabelCGBPal3c1 EQU 8935
-TileLabelCGBPal3c2 EQU 6596
-TileLabelCGBPal3c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 4
-TileLabelCGBPal4c0 EQU 6076
-TileLabelCGBPal4c1 EQU 8935
-TileLabelCGBPal4c2 EQU 6596
-TileLabelCGBPal4c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 5
-TileLabelCGBPal5c0 EQU 6076
-TileLabelCGBPal5c1 EQU 8935
-TileLabelCGBPal5c2 EQU 6596
-TileLabelCGBPal5c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 6
-TileLabelCGBPal6c0 EQU 6076
-TileLabelCGBPal6c1 EQU 8935
-TileLabelCGBPal6c2 EQU 6596
-TileLabelCGBPal6c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; Gameboy Color palette 7
-TileLabelCGBPal7c0 EQU 6076
-TileLabelCGBPal7c1 EQU 8935
-TileLabelCGBPal7c2 EQU 6596
-TileLabelCGBPal7c3 EQU 5344
+DW 6076
+DW 8935
+DW 6596
+DW 5344
 
 ; CGB palette entries.
-TileLabelCGB0 EQU 0
-TileLabelCGB1 EQU 0
-TileLabelCGB2 EQU 0
-TileLabelCGB3 EQU 0
-TileLabelCGB4 EQU 0
-TileLabelCGB5 EQU 0
-TileLabelCGB6 EQU 0
-TileLabelCGB7 EQU 0
-TileLabelCGB8 EQU 0
-TileLabelCGB9 EQU 0
-TileLabelCGB10 EQU 0
-TileLabelCGB11 EQU 1
-TileLabelCGB12 EQU 0
-TileLabelCGB13 EQU 0
-TileLabelCGB14 EQU 1
-TileLabelCGB15 EQU 1
-TileLabelCGB16 EQU 1
-TileLabelCGB17 EQU 1
-TileLabelCGB18 EQU 1
-TileLabelCGB19 EQU 1
-TileLabelCGB20 EQU 0
-TileLabelCGB21 EQU 1
-TileLabelCGB22 EQU 1
-TileLabelCGB23 EQU 1
-TileLabelCGB24 EQU 1
-TileLabelCGB25 EQU 1
-TileLabelCGB26 EQU 1
-TileLabelCGB27 EQU 1
-TileLabelCGB28 EQU 1
-TileLabelCGB29 EQU 1
-TileLabelCGB30 EQU 1
-TileLabelCGB31 EQU 1
-TileLabelCGB32 EQU 1
-TileLabelCGB33 EQU 1
-TileLabelCGB34 EQU 1
-TileLabelCGB35 EQU 1
-TileLabelCGB36 EQU 1
-TileLabelCGB37 EQU 1
-TileLabelCGB38 EQU 1
-TileLabelCGB39 EQU 1
-TileLabelCGB40 EQU 1
-TileLabelCGB41 EQU 1
-TileLabelCGB42 EQU 1
-TileLabelCGB43 EQU 1
-TileLabelCGB44 EQU 1
-TileLabelCGB45 EQU 1
-TileLabelCGB46 EQU 1
-TileLabelCGB47 EQU 1
-TileLabelCGB48 EQU 1
-TileLabelCGB49 EQU 1
-TileLabelCGB50 EQU 1
-TileLabelCGB51 EQU 1
-TileLabelCGB52 EQU 1
-TileLabelCGB53 EQU 1
-TileLabelCGB54 EQU 1
-TileLabelCGB55 EQU 1
-TileLabelCGB56 EQU 1
-TileLabelCGB57 EQU 1
-TileLabelCGB58 EQU 1
-TileLabelCGB59 EQU 1
-TileLabelCGB60 EQU 1
-TileLabelCGB61 EQU 0
-TileLabelCGB62 EQU 0
-TileLabelCGB63 EQU 0
-TileLabelCGB64 EQU 1
-TileLabelCGB65 EQU 1
-TileLabelCGB66 EQU 1
-TileLabelCGB67 EQU 1
-TileLabelCGB68 EQU 1
-TileLabelCGB69 EQU 1
-TileLabelCGB70 EQU 1
-TileLabelCGB71 EQU 1
-TileLabelCGB72 EQU 1
-TileLabelCGB73 EQU 1
-TileLabelCGB74 EQU 1
-TileLabelCGB75 EQU 1
-TileLabelCGB76 EQU 1
-TileLabelCGB77 EQU 1
-TileLabelCGB78 EQU 1
-TileLabelCGB79 EQU 1
-TileLabelCGB80 EQU 1
-TileLabelCGB81 EQU 1
-TileLabelCGB82 EQU 1
-TileLabelCGB83 EQU 1
-TileLabelCGB84 EQU 1
-TileLabelCGB85 EQU 1
-TileLabelCGB86 EQU 1
-TileLabelCGB87 EQU 1
-TileLabelCGB88 EQU 1
-TileLabelCGB89 EQU 1
-TileLabelCGB90 EQU 1
-TileLabelCGB91 EQU 1
-TileLabelCGB92 EQU 1
-TileLabelCGB93 EQU 1
-TileLabelCGB94 EQU 1
-TileLabelCGB95 EQU 1
-TileLabelCGB96 EQU 1
-TileLabelCGB97 EQU 1
-TileLabelCGB98 EQU 1
-TileLabelCGB99 EQU 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 TileLabelCGB100 EQU 1
 TileLabelCGB101 EQU 1
 TileLabelCGB102 EQU 1
