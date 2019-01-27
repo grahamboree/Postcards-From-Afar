@@ -18,7 +18,7 @@ AirplaneWindowLabelWidth  EQU 10
 AirplaneWindowLabelHeight EQU 9
 AirplaneWindowLabelBank   EQU 0
 
- SECTION "AirplaneWindowSection", ROM0
+ SECTION "AirplaneWindowSection", ROMX, BANK[1]
 
 AirplaneWindowLabel::
 DB $00,$02,$27,$28,$30,$30,$32,$27,$02,$00
