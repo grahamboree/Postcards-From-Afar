@@ -10,7 +10,7 @@
 ;   Compression          : None.
 ;   Counter              : None.
 ;   Tile size            : 8 x 8
-;   Tiles                : 0 to 29
+;   Tiles                : 0 to 30
 ;
 ;   Palette colors       : Included.
 ;   SGB Palette          : None.
@@ -23,110 +23,111 @@
 
 ; Bank of tiles.
 IslandLabelBank EQU 1
-IslandPalette:
+
 ; Super Gameboy palette 0
-
-
-
-
+IslandLabelSGBPal0c0 EQU 6076
+IslandLabelSGBPal0c1 EQU 8935
+IslandLabelSGBPal0c2 EQU 6596
+IslandLabelSGBPal0c3 EQU 5344
 
 ; Super Gameboy palette 1
-
-
-
-
+IslandLabelSGBPal1c0 EQU 6076
+IslandLabelSGBPal1c1 EQU 8935
+IslandLabelSGBPal1c2 EQU 6596
+IslandLabelSGBPal1c3 EQU 5344
 
 ; Super Gameboy palette 2
-
-
-
-
+IslandLabelSGBPal2c0 EQU 6076
+IslandLabelSGBPal2c1 EQU 8935
+IslandLabelSGBPal2c2 EQU 6596
+IslandLabelSGBPal2c3 EQU 5344
 
 ; Super Gameboy palette 3
-
-
-
-
+IslandLabelSGBPal3c0 EQU 6076
+IslandLabelSGBPal3c1 EQU 8935
+IslandLabelSGBPal3c2 EQU 6596
+IslandLabelSGBPal3c3 EQU 5344
 
 ; Gameboy Color palette 0
-DW 30286
-DW 31409
-DW 32500
-DW 30222
+IslandLabelCGBPal0c0 EQU 30286
+IslandLabelCGBPal0c1 EQU 31409
+IslandLabelCGBPal0c2 EQU 32500
+IslandLabelCGBPal0c3 EQU 30222
 
 ; Gameboy Color palette 1
-DW 19023
-DW 23250
-DW 31510
-DW 30222
+IslandLabelCGBPal1c0 EQU 19023
+IslandLabelCGBPal1c1 EQU 23250
+IslandLabelCGBPal1c2 EQU 31510
+IslandLabelCGBPal1c3 EQU 30222
 
 ; Gameboy Color palette 2
-DW 19023
-DW 27084
-DW 31510
-DW 30222
+IslandLabelCGBPal2c0 EQU 19023
+IslandLabelCGBPal2c1 EQU 27084
+IslandLabelCGBPal2c2 EQU 31510
+IslandLabelCGBPal2c3 EQU 30222
 
 ; Gameboy Color palette 3
-DW 6076
-DW 8935
-DW 6596
-DW 5344
+IslandLabelCGBPal3c0 EQU 6076
+IslandLabelCGBPal3c1 EQU 8935
+IslandLabelCGBPal3c2 EQU 6596
+IslandLabelCGBPal3c3 EQU 5344
 
 ; Gameboy Color palette 4
-DW 6076
-DW 8935
-DW 6596
-DW 5344
+IslandLabelCGBPal4c0 EQU 6076
+IslandLabelCGBPal4c1 EQU 8935
+IslandLabelCGBPal4c2 EQU 6596
+IslandLabelCGBPal4c3 EQU 5344
 
 ; Gameboy Color palette 5
-DW 6076
-DW 8935
-DW 6596
-DW 5344
+IslandLabelCGBPal5c0 EQU 6076
+IslandLabelCGBPal5c1 EQU 8935
+IslandLabelCGBPal5c2 EQU 6596
+IslandLabelCGBPal5c3 EQU 5344
 
 ; Gameboy Color palette 6
-DW 6076
-DW 8935
-DW 6596
-DW 5344
+IslandLabelCGBPal6c0 EQU 6076
+IslandLabelCGBPal6c1 EQU 8935
+IslandLabelCGBPal6c2 EQU 6596
+IslandLabelCGBPal6c3 EQU 5344
 
 ; Gameboy Color palette 7
-DW 6076
-DW 8935
-DW 6596
-DW 5344
+IslandLabelCGBPal7c0 EQU 6076
+IslandLabelCGBPal7c1 EQU 8935
+IslandLabelCGBPal7c2 EQU 6596
+IslandLabelCGBPal7c3 EQU 5344
 
 ; CGB palette entries.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+IslandLabelCGB0 EQU 0
+IslandLabelCGB1 EQU 0
+IslandLabelCGB2 EQU 0
+IslandLabelCGB3 EQU 0
+IslandLabelCGB4 EQU 1
+IslandLabelCGB5 EQU 1
+IslandLabelCGB6 EQU 1
+IslandLabelCGB7 EQU 2
+IslandLabelCGB8 EQU 0
+IslandLabelCGB9 EQU 0
+IslandLabelCGB10 EQU 0
+IslandLabelCGB11 EQU 0
+IslandLabelCGB12 EQU 0
+IslandLabelCGB13 EQU 2
+IslandLabelCGB14 EQU 1
+IslandLabelCGB15 EQU 1
+IslandLabelCGB16 EQU 1
+IslandLabelCGB17 EQU 1
+IslandLabelCGB18 EQU 1
+IslandLabelCGB19 EQU 1
+IslandLabelCGB20 EQU 1
+IslandLabelCGB21 EQU 1
+IslandLabelCGB22 EQU 1
+IslandLabelCGB23 EQU 1
+IslandLabelCGB24 EQU 1
+IslandLabelCGB25 EQU 1
+IslandLabelCGB26 EQU 1
+IslandLabelCGB27 EQU 1
+IslandLabelCGB28 EQU 1
+IslandLabelCGB29 EQU 1
+IslandLabelCGB30 EQU 0
 
 ; Start of tile array.
  GLOBAL IslandLabel
