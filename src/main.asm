@@ -211,11 +211,8 @@ Init:
 	dec		b
 	jr		nz, .copyDMALoop
 
-	ld		hl, $FF4F
-	ld		[hl], 0
-
-	ld		hl, PyramidPalette
-	call	LoadPalette
+	ld		a, 0
+	ld		[$FF4F], a
 
 	; copy tiles to VRAM
 	;ld		hl, FontData				; source
@@ -223,30 +220,6 @@ Init:
 	;ld		bc, EndFontData - FontData	; number of bytes to copy
 	;call	mem_CopyMono
 	
-	; copy tiles
-	ld bc, PyrmaidsTilesEnd - PyrmaidsTiles
-	ld de, _VRAM
-	ld hl, PyrmaidsTiles
-	call memcpy
-
-	ld		a, 1
-	ld		[$FF4F], a
-
-	ld		hl, PyramidLabelPLN1
-	call	CopyTileMap
-
-	;ld		a, 0		; put everything to zero
-	;ld		bc, 32*32	; 
-	;ld		hl, _SCRN0
-	;call 	memfill
-
-	ld		a, 0
-	ld		[$FF4F], a
-
-	; copy map to VRAM
-	ld		hl, PyramidLabelPLN0
-	call	CopyTileMap
-
 	ld		a, 0
 	ld		[desiredTextPage], a
 
@@ -416,22 +389,49 @@ PreVBlank:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Load the various large images on VBlank, and do any other scene-transition work
 LoadPyramids:
-	ld bc, PyrmaidsTiles
-	ld a, b
-	ld [tileBytesToLoadHigh], a
-	ld a, c
-	ld [tileBytesToLoadLow], a
-	ld de, PyrmaidsTilesEnd - PyrmaidsTiles
-	ld a, d
-	ld [tileBytesToLoadSizeHigh], a
-	ld a, e
-	ld [tileBytesToLoadSizeLow], a
-	
-	ld bc, PyramidLabel
-	ld a, b
-	ld [mapAddressHigh], a
-	ld a, c
-	ld [mapAddressLow], a
+
+;;;;;;;;;;;;;;;;;;;;
+.waitForVBlank:
+	ld		a, [rLY]
+	cp		144
+	jr		c, .waitForVBlank
+
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+	ld		hl, PyramidPalette
+	call	LoadPalette
+
+	; copy tiles
+	ld bc, PyrmaidsTilesEnd - PyrmaidsTiles
+	ld de, _VRAM
+	ld hl, PyrmaidsTiles
+	call memcpy
+
+	; copy map to VRAM
+	ld		hl, PyramidLabelPLN0
+	call	CopyTileMap
+
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, PyramidLabelPLN1
+	call	CopyTileMap
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+;;;;;;;;;;;;;;;;;;;;
+	pop		af
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
 	
 	ret
 	
