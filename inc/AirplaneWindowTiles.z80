@@ -23,7 +23,7 @@
  SECTION "Tiles", ROMX, BANK[1]
 
 ; Start of tile array.
-TileLabel::
+AirplaneTiles:
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FE,$FF
 DB $FF,$FF,$FE,$FF,$FF,$FF,$FE,$FF
 DB $FF,$FF,$FE,$FF,$FF,$FF,$FE,$FF
@@ -280,5 +280,6 @@ DB $55,$00,$00,$FF,$00,$FF,$00,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$00,$FF
 DB $04,$FF,$00,$FF,$00,$FF,$00,$FF
+AirplaneTilesEnd:
 
 ; End of AIRPLANEWINDOWTILES.Z80
