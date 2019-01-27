@@ -365,45 +365,55 @@ GregTempCode:
 	cp 1
 	jr z, .image1
 	cp 2
-	jr z, .image1
+	jr z, .image2
 	cp 3
-	jr z, .image1
+	jr z, .image3
 	cp 4
-	jr z, .image1
+	jr z, .image4
 	cp 5
-	jr z, .image1
+	jr z, .image5
 	cp 6
-	jr z, .image1
+	jr z, .image6
 	cp 7
-	jr z, .image1
+	jr z, .image7
 	cp 8
-	jr z, .image1
+	jr z, .image8
 	cp 9
-	jr z, .image1
+	jr z, .image9
 	cp 10
-	jr z, .image1
+	jr z, .image10
 	ret
 
-.image1
+.image1 ; airplane
+	;call LoadAirplane
+	call LoadCross
+	ret
+.image2 ; sand dunes
 	call LoadPyramids
 	ret
-.image2
+.image3 ; falls
+	call LoadPyramids
 	ret
-.image3
+.image4 ; island
+	call LoadPyramids
 	ret
-.image4
+.image5 ; killi
+	call LoadPyramids
 	ret
-.image5
+.image6 ; safari
+	call LoadPyramids
 	ret
-.image6
+.image7 ; scuba
+	call LoadPyramids
 	ret
-.image7
+.image8 ; pyramids
+	call LoadPyramids
 	ret
-.image8
+.image9 ; cross
+	call LoadCross
 	ret
-.image9
-	ret
-.image10
+.image10 ; erta ale
+	call LoadPyramids
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -422,7 +432,7 @@ PreVBlank:
 	ret
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Load the various large images on VBlank, and do any other scene-transition work
+
 LoadPyramids:
 
 ;;;;;;;;;;;;;;;;;;;;
@@ -470,25 +480,102 @@ LoadPyramids:
 	
 	ret
 	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 LoadAirplane:
-	ld bc, AirplaneTiles
-	ld a, b
-	ld [tileBytesToLoadHigh], a
-	ld a, c
-	ld [tileBytesToLoadLow], a
-	ld bc, EndAirplaneTiles - AirplaneTiles
-	ld a, b
-	ld [tileBytesToLoadSizeHigh], a
-	ld a, c
-	ld [tileBytesToLoadSizeLow], a
+
+;;;;;;;;;;;;;;;;;;;;
+.waitForVBlank:
+	ld		a, [rLY]
+	cp		144
+	jr		c, .waitForVBlank
+
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+	ld		hl, AirplanePalette
+	call	LoadPalette
+	; copy tiles
+	ld bc, AirplaneTilesEnd - AirplaneTiles
+	ld de, _VRAM
+	ld hl, AirplaneTiles
+	call memcpy
+
+	; copy map to VRAM
+	ld		hl, AirplaneWindowLabelPLN0
+	call	CopyTileMap
+
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, AirplaneWindowLabelPLN1
+	call	CopyTileMap
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+;;;;;;;;;;;;;;;;;;;;
+	pop		af
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
 	
-	ld bc, AirplaneMap
-	ld a, b
-	ld [mapAddressHigh], a
-	ld a, c
-	ld [mapAddressLow], a
 	ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+LoadCross:
+
+;;;;;;;;;;;;;;;;;;;;
+.waitForVBlank:
+	ld		a, [rLY]
+	cp		144
+	jr		c, .waitForVBlank
+
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+	ld		hl, CrossPalette
+	call	LoadPalette
+	; copy tiles
+	ld bc, CrossTilesEnd - CrossTiles
+	ld de, _VRAM
+	ld hl, CrossTiles
+	call memcpy
+
+	; copy map to VRAM
+	ld		hl, CrossLabelPLN0
+	call	CopyTileMap
+
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, CrossLabelPLN1
+	call	CopyTileMap
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+;;;;;;;;;;;;;;;;;;;;
+	pop		af
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
 	
+	ret
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; read button state into [padState]
 ReadPad:
@@ -659,32 +746,6 @@ CopyTileMap:
 	jr 		.copy_bg_row	; loop
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-CopyTileMapAttribs:
-	ld		de, _SCRN0		; map 0 loaction
-	ld		b, 18	; number of lines to copy
-
-.copy_bg_row
-	ld		a, b 	; do we have more lines to copy?
-	cp 		0		; sets the flags
-	ret 	z		; if zero, return
-
-	dec 	b		; decrement the line count and save it
-	push 	bc
-
-	ld		bc, 20	; lines are 20 bytes
-	call 	memcpy	; copy a line
-	
-	push	hl
-	ld		hl, 12
-	add     hl, de
-	ld		d, h
-	ld		e, l
-	pop		hl
-
-	pop 	bc
-	jr 		.copy_bg_row	; loop
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Expects palette address on hl
 LoadPalette:
 	; palette colors
@@ -800,95 +861,17 @@ UITilesEnd:
 ;Tiles and Maps for Large Images
 
 ;Intro
-AirplaneTiles:
-	INCLUDE "AirplaneWindowTiles.z80"
-EndAirplaneTiles:
+INCLUDE "AirplaneWindowTiles.inc"
+INCLUDE "AirplaneWindowTiles.z80"
+INCLUDE "AirplaneWindowMap.z80"
 
-AirplaneMap:
-	INCLUDE "AirplaneWindowMap.z80"
-EndAirplaneMap:
+INCLUDE "PyramidsTiles.z80"
+INCLUDE "PyramidMap.z80"
+INCLUDE "PyramidsTiles.inc"
 
-;Act 1
-
-DunesTiles:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndDunesTiles:
-
-DunesMap:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndDunesMap:
-
-WaterfallTiles:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndWaterfallTiles:
-
-WaterfallMap:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndWaterfallMap:
-
-RobbenIslandTiles:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndRobbenIslandTiles:
-
-RobbenIslandMap:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndRobbenIslandMap:
-
-;Act 2
-SafariTiles:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndSafariTiles:
-
-SafariMap:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndSafariMap:
-
-ScubaTiles:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndScubaTiles:
-
-ScubaMap:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndScubaMap:
-
-KiliTiles:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndKiliTiles:
-
-KiliMap:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndKiliMap:
-
-;Act 3
-	INCLUDE "PyramidsTiles.z80"
-	INCLUDE "PyramidMap.z80"
-	INCLUDE "PyramidsTiles.inc"
-
-VolcanoTiles:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndVolcanoTiles:
-
-VolcanoMap:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndVolcanoMap:
-
-ChurchTiles:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndChurchTiles:
-
-ChurchMap:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndChurchMap:
-
-;Outro
-
-OutroTiles:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndOutroTiles:
-
-OutroMap:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndOutroMap:
+INCLUDE "CrossTiles.inc"
+INCLUDE "CrossTiles.z80"
+INCLUDE "CrossMap.z80"
 
 ; Additional Maps
 
