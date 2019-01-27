@@ -4,7 +4,7 @@
 ;
 ; Info:
 ;   Section       : ScubaMap
-;   Bank          : 0
+;   Bank          : 1
 ;   Map size      : 20 x 18
 ;   Tile set      : ScubaTiles.gbr
 ;   Plane count   : 2 planes (16 bits)
@@ -16,7 +16,7 @@
 
 ScubaMapWidth  EQU 20
 ScubaMapHeight EQU 18
-ScubaMapBank   EQU 0
+ScubaMapBank   EQU 1
 
  GLOBAL ScubaMap
  GLOBAL ScubaMapPLN0

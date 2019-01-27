@@ -4,7 +4,7 @@
 ;
 ; Info:
 ;   Section       : CrossSection
-;   Bank          : 0
+;   Bank          : 1
 ;   Map size      : 20 x 18
 ;   Tile set      : CrossTiles.gbr
 ;   Plane count   : 2 planes (16 bits)
@@ -16,7 +16,7 @@
 
 CrossLabelWidth  EQU 20
 CrossLabelHeight EQU 18
-CrossLabelBank   EQU 0
+CrossLabelBank   EQU 1
 
  GLOBAL CrossLabel
  GLOBAL CrossLabelPLN0

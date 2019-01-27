@@ -6,9 +6,9 @@
 ;   Section       : IslandSection
 ;   Bank          : 1
 ;   Map size      : 20 x 18
-;   Tile set      : D:\GAMEBOYADVENTURE\GGJ2019\Tiles Map Source\IslandTiles.gbr
+;   Tile set      : IslandTiles.gbr
 ;   Plane count   : 2 planes (16 bits)
-;   Plane order   : Tiles are continues
+;   Plane order   : Planes are continues
 ;   Tile offset   : 0
 ;   Split data    : No
 ;
@@ -19,5 +19,7 @@ IslandLabelHeight EQU 18
 IslandLabelBank   EQU 1
 
  GLOBAL IslandLabel
+ GLOBAL IslandLabelPLN0
+ GLOBAL IslandLabelPLN1
 
 ; End of ISLANDMAP.INC

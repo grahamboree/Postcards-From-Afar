@@ -4,7 +4,7 @@
 ;
 ; Info:
 ;   Section       : ErtaAleSection
-;   Bank          : 0
+;   Bank          : 1
 ;   Map size      : 20 x 18
 ;   Tile set      : ErtaAleTiles.gbr
 ;   Plane count   : 2 planes (16 bits)
@@ -16,7 +16,7 @@
 
 ErtaAleLabelWidth  EQU 20
 ErtaAleLabelHeight EQU 18
-ErtaAleLabelBank   EQU 0
+ErtaAleLabelBank   EQU 1
 
  GLOBAL ErtaAleLabel
  GLOBAL ErtaAleLabelPLN0

@@ -4,7 +4,7 @@
 ;
 ; Info:
 ;   Section       : KilliSection
-;   Bank          : 0
+;   Bank          : 1
 ;   Map size      : 20 x 18
 ;   Tile set      : Killi.gbr
 ;   Plane count   : 2 planes (16 bits)
@@ -16,9 +16,9 @@
 
 KilliLabelWidth  EQU 20
 KilliLabelHeight EQU 18
-KilliLabelBank   EQU 0
+KilliLabelBank   EQU 1
 
- SECTION "KilliSection", HOME
+ SECTION "KilliSection", DATA, BANK[1]
 
 KilliLabel::
 KilliLabelPLN0::

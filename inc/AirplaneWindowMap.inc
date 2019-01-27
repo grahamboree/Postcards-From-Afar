@@ -4,11 +4,11 @@
 ;
 ; Info:
 ;   Section       : AirplaneWindowSection
-;   Bank          : 0
+;   Bank          : 1
 ;   Map size      : 20 x 18
-;   Tile set      : D:\GAMEBOYADVENTURE\GGJ2019\Tiles Map Source\AirplaneWindow.gbr
+;   Tile set      : AirplaneWindow.gbr
 ;   Plane count   : 2 planes (16 bits)
-;   Plane order   : Tiles are continues
+;   Plane order   : Planes are continues
 ;   Tile offset   : 0
 ;   Split data    : No
 ;
@@ -16,8 +16,10 @@
 
 AirplaneWindowLabelWidth  EQU 20
 AirplaneWindowLabelHeight EQU 18
-AirplaneWindowLabelBank   EQU 0
+AirplaneWindowLabelBank   EQU 1
 
  GLOBAL AirplaneWindowLabel
+ GLOBAL AirplaneWindowLabelPLN0
+ GLOBAL AirplaneWindowLabelPLN1
 
 ; End of AIRPLANEWINDOWMAP.INC
