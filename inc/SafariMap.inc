@@ -6,9 +6,9 @@
 ;   Section       : SafariSection
 ;   Bank          : 1
 ;   Map size      : 20 x 18
-;   Tile set      : D:\GAMEBOYADVENTURE\GGJ2019\Tiles Map Source\SafariTiles.gbr
-;   Plane count   : 1 plane (8 bits)
-;   Plane order   : Tiles are continues
+;   Tile set      : SafariTiles.gbr
+;   Plane count   : 2 planes (16 bits)
+;   Plane order   : Planes are continues
 ;   Tile offset   : 0
 ;   Split data    : No
 ;
@@ -19,5 +19,7 @@ SafariLabelHeight EQU 18
 SafariLabelBank   EQU 1
 
  GLOBAL SafariLabel
+ GLOBAL SafariLabelPLN0
+ GLOBAL SafariLabelPLN1
 
 ; End of SAFARIMAP.INC

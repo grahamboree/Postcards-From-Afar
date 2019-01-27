@@ -6,9 +6,9 @@
 ;   Section       : CrossSection
 ;   Bank          : 0
 ;   Map size      : 20 x 18
-;   Tile set      : D:\GAMEBOYADVENTURE\GGJ2019\Tiles Map Source\CrossTiles.gbr
-;   Plane count   : 1 plane (8 bits)
-;   Plane order   : Tiles are continues
+;   Tile set      : CrossTiles.gbr
+;   Plane count   : 2 planes (16 bits)
+;   Plane order   : Planes are continues
 ;   Tile offset   : 0
 ;   Split data    : No
 ;
@@ -19,5 +19,7 @@ CrossLabelHeight EQU 18
 CrossLabelBank   EQU 0
 
  GLOBAL CrossLabel
+ GLOBAL CrossLabelPLN0
+ GLOBAL CrossLabelPLN1
 
 ; End of CROSSMAP.INC

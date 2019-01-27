@@ -6,9 +6,9 @@
 ;   Section       : KilliSection
 ;   Bank          : 0
 ;   Map size      : 20 x 18
-;   Tile set      : D:\GAMEBOYADVENTURE\GGJ2019\Tiles Map Source\Killi.gbr
-;   Plane count   : 1 plane (8 bits)
-;   Plane order   : Tiles are continues
+;   Tile set      : Killi.gbr
+;   Plane count   : 2 planes (16 bits)
+;   Plane order   : Planes are continues
 ;   Tile offset   : 0
 ;   Split data    : No
 ;
@@ -19,5 +19,7 @@ KilliLabelHeight EQU 18
 KilliLabelBank   EQU 0
 
  GLOBAL KilliLabel
+ GLOBAL KilliLabelPLN0
+ GLOBAL KilliLabelPLN1
 
 ; End of KILLIMAP.INC

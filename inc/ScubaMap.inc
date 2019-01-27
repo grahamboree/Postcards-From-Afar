@@ -6,9 +6,9 @@
 ;   Section       : ScubaMap
 ;   Bank          : 0
 ;   Map size      : 20 x 18
-;   Tile set      : D:\GAMEBOYADVENTURE\GGJ2019\Tiles Map Source\ScubaTiles.gbr
-;   Plane count   : 1 plane (8 bits)
-;   Plane order   : Tiles are continues
+;   Tile set      : ScubaTiles.gbr
+;   Plane count   : 2 planes (16 bits)
+;   Plane order   : Planes are continues
 ;   Tile offset   : 0
 ;   Split data    : No
 ;
@@ -19,5 +19,7 @@ ScubaMapHeight EQU 18
 ScubaMapBank   EQU 0
 
  GLOBAL ScubaMap
+ GLOBAL ScubaMapPLN0
+ GLOBAL ScubaMapPLN1
 
 ; End of SCUBAMAP.INC

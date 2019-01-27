@@ -6,9 +6,9 @@
 ;   Section       : FallsSection
 ;   Bank          : 1
 ;   Map size      : 20 x 18
-;   Tile set      : D:\GAMEBOYADVENTURE\GGJ2019\Tiles Map Source\FallsTiles.gbr
-;   Plane count   : 1 plane (8 bits)
-;   Plane order   : Tiles are continues
+;   Tile set      : FallsTiles.gbr
+;   Plane count   : 2 planes (16 bits)
+;   Plane order   : Planes are continues
 ;   Tile offset   : 0
 ;   Split data    : No
 ;
@@ -19,5 +19,7 @@ FallsLabelHeight EQU 18
 FallsLabelBank   EQU 1
 
  GLOBAL FallsLabel
+ GLOBAL FallsLabelPLN0
+ GLOBAL FallsLabelPLN1
 
 ; End of FALLSMAP.INC

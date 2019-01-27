@@ -6,9 +6,9 @@
 ;   Section       : ErtaAleSection
 ;   Bank          : 0
 ;   Map size      : 20 x 18
-;   Tile set      : D:\GAMEBOYADVENTURE\GGJ2019\Tiles Map Source\ErtaAleTiles.gbr
-;   Plane count   : 1 plane (8 bits)
-;   Plane order   : Tiles are continues
+;   Tile set      : ErtaAleTiles.gbr
+;   Plane count   : 2 planes (16 bits)
+;   Plane order   : Planes are continues
 ;   Tile offset   : 0
 ;   Split data    : No
 ;
@@ -19,5 +19,7 @@ ErtaAleLabelHeight EQU 18
 ErtaAleLabelBank   EQU 0
 
  GLOBAL ErtaAleLabel
+ GLOBAL ErtaAleLabelPLN0
+ GLOBAL ErtaAleLabelPLN1
 
 ; End of ERTAALEMAP.INC
