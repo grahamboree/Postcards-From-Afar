@@ -359,6 +359,7 @@ GameLoop:
 	ld a, b
 	or c
 	jp z, .doneLoadTiles
+	jp .loadMap
 .loadTiles:
 	call memcpy
 .loadMap:
