@@ -385,26 +385,25 @@ GregTempCode:
 	ret
 
 .image1 ; airplane
-	;call LoadAirplane
-	call LoadCross
+	call LoadAirplane
 	ret
 .image2 ; sand dunes
-	call LoadPyramids
+	call LoadSandDunes
 	ret
 .image3 ; falls
-	call LoadPyramids
+	call LoadFalls
 	ret
 .image4 ; island
-	call LoadPyramids
+	call LoadIsland
 	ret
 .image5 ; killi
-	call LoadPyramids
+	call LoadKilli
 	ret
 .image6 ; safari
-	call LoadPyramids
+	call LoadSafari
 	ret
 .image7 ; scuba
-	call LoadPyramids
+	call LoadScuba
 	ret
 .image8 ; pyramids
 	call LoadPyramids
@@ -413,7 +412,7 @@ GregTempCode:
 	call LoadCross
 	ret
 .image10 ; erta ale
-	call LoadPyramids
+	call LoadErta
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -429,55 +428,6 @@ PreVBlank:
 	ld a, [tileBytesToLoadLow]
 	ld l, a
 	ld de, _VRAM
-	ret
-	
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-LoadPyramids:
-
-;;;;;;;;;;;;;;;;;;;;
-.waitForVBlank:
-	ld		a, [rLY]
-	cp		144
-	jr		c, .waitForVBlank
-
-	; turn off LCD because this takes too long to do in a single vblank
-	ld		a, [rLCDC]
-	push	af
-	ld		a, LCDCF_OFF
-	ld		[rLCDC], a
-;;;;;;;;;;;;;;;;;;;;
-
-	ld		a, 0
-	ld		[$FF4F], a
-
-	ld		hl, PyramidPalette
-	call	LoadPalette
-
-	; copy tiles
-	ld bc, PyrmaidsTilesEnd - PyrmaidsTiles
-	ld de, _VRAM
-	ld hl, PyrmaidsTiles
-	call memcpy
-
-	; copy map to VRAM
-	ld		hl, PyramidLabelPLN0
-	call	CopyTileMap
-
-	ld		a, 1
-	ld		[$FF4F], a
-
-	ld		hl, PyramidLabelPLN1
-	call	CopyTileMap
-
-	ld		a, 0
-	ld		[$FF4F], a
-
-;;;;;;;;;;;;;;;;;;;;
-	pop		af
-	ld		[rLCDC], a
-;;;;;;;;;;;;;;;;;;;;
-	
 	ret
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -528,7 +478,332 @@ LoadAirplane:
 	
 	ret
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+LoadSandDunes:
+
+;;;;;;;;;;;;;;;;;;;;
+.waitForVBlank:
+	ld		a, [rLY]
+	cp		144
+	jr		c, .waitForVBlank
+
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+	ld		hl, SandDunesPalette
+	call	LoadPalette
+	; copy tiles
+	ld bc, SandDunesTilesEnd - SandDunesTiles
+	ld de, _VRAM
+	ld hl, SandDunesTiles
+	call memcpy
+
+	; copy map to VRAM
+	ld		hl, SandDunesPLN0
+	call	CopyTileMap
+
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, SandDunesPLN1
+	call	CopyTileMap
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+;;;;;;;;;;;;;;;;;;;;
+	pop		af
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+	
+	ret
+
+LoadFalls:
+
+;;;;;;;;;;;;;;;;;;;;
+.waitForVBlank:
+	ld		a, [rLY]
+	cp		144
+	jr		c, .waitForVBlank
+
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+	ld		hl, FallsPalette
+	call	LoadPalette
+	; copy tiles
+	ld bc, FallsTilesEnd - FallsTiles
+	ld de, _VRAM
+	ld hl, FallsTiles
+	call memcpy
+
+	; copy map to VRAM
+	ld		hl, FallsPLN0
+	call	CopyTileMap
+
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, FallsPLN1
+	call	CopyTileMap
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+;;;;;;;;;;;;;;;;;;;;
+	pop		af
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+	
+	ret
+
+LoadIsland:
+
+;;;;;;;;;;;;;;;;;;;;
+.waitForVBlank:
+	ld		a, [rLY]
+	cp		144
+	jr		c, .waitForVBlank
+
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+	ld		hl, IslandPalette
+	call	LoadPalette
+	; copy tiles
+	ld bc, IslandTilesEnd - IslandTiles
+	ld de, _VRAM
+	ld hl, IslandTiles
+	call memcpy
+
+	; copy map to VRAM
+	ld		hl, IslandPLN0
+	call	CopyTileMap
+
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, IslandPLN1
+	call	CopyTileMap
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+;;;;;;;;;;;;;;;;;;;;
+	pop		af
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+	
+	ret
+
+LoadKilli:
+
+;;;;;;;;;;;;;;;;;;;;
+.waitForVBlank:
+	ld		a, [rLY]
+	cp		144
+	jr		c, .waitForVBlank
+
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+	ld		hl, KilliPalette
+	call	LoadPalette
+	; copy tiles
+	ld bc, KilliTilesEnd - KilliTiles
+	ld de, _VRAM
+	ld hl, KilliTiles
+	call memcpy
+
+	; copy map to VRAM
+	ld		hl, KilliPLN0
+	call	CopyTileMap
+
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, KilliPLN1
+	call	CopyTileMap
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+;;;;;;;;;;;;;;;;;;;;
+	pop		af
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+	
+	ret
+
+LoadSafari:
+
+;;;;;;;;;;;;;;;;;;;;
+.waitForVBlank:
+	ld		a, [rLY]
+	cp		144
+	jr		c, .waitForVBlank
+
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+	ld		hl, SafariPalette
+	call	LoadPalette
+	; copy tiles
+	ld bc, SafariTilesEnd - SafariTiles
+	ld de, _VRAM
+	ld hl, SafariTiles
+	call memcpy
+
+	; copy map to VRAM
+	ld		hl, SafariPLN0
+	call	CopyTileMap
+
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, SafariPLN1
+	call	CopyTileMap
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+;;;;;;;;;;;;;;;;;;;;
+	pop		af
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+	
+	ret
+
+LoadErta:
+
+;;;;;;;;;;;;;;;;;;;;
+.waitForVBlank:
+	ld		a, [rLY]
+	cp		144
+	jr		c, .waitForVBlank
+
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+	ld		hl, ErtaPalette
+	call	LoadPalette
+	; copy tiles
+	ld bc, ErtaTilesEnd - ErtaTiles
+	ld de, _VRAM
+	ld hl, ErtaTiles
+	call memcpy
+
+	; copy map to VRAM
+	ld		hl, ErtaPLN0
+	call	CopyTileMap
+
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, ErtaPLN1
+	call	CopyTileMap
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+;;;;;;;;;;;;;;;;;;;;
+	pop		af
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+	
+	ret
+
+
+
+
+
+LoadPyramids:
+
+;;;;;;;;;;;;;;;;;;;;
+.waitForVBlank:
+	ld		a, [rLY]
+	cp		144
+	jr		c, .waitForVBlank
+
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+	ld		hl, PyramidPalette
+	call	LoadPalette
+
+	; copy tiles
+	ld bc, PyrmaidsTilesEnd - PyrmaidsTiles
+	ld de, _VRAM
+	ld hl, PyrmaidsTiles
+	call memcpy
+
+	; copy map to VRAM
+	ld		hl, PyramidLabelPLN0
+	call	CopyTileMap
+
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, PyramidLabelPLN1
+	call	CopyTileMap
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+;;;;;;;;;;;;;;;;;;;;
+	pop		af
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+	
+	ret
 
 LoadCross:
 
@@ -564,6 +839,52 @@ LoadCross:
 	ld		[$FF4F], a
 
 	ld		hl, CrossLabelPLN1
+	call	CopyTileMap
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+;;;;;;;;;;;;;;;;;;;;
+	pop		af
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+	
+	ret
+
+LoadScuba:
+
+;;;;;;;;;;;;;;;;;;;;
+.waitForVBlank:
+	ld		a, [rLY]
+	cp		144
+	jr		c, .waitForVBlank
+
+	; turn off LCD because this takes too long to do in a single vblank
+	ld		a, [rLCDC]
+	push	af
+	ld		a, LCDCF_OFF
+	ld		[rLCDC], a
+;;;;;;;;;;;;;;;;;;;;
+
+	ld		a, 0
+	ld		[$FF4F], a
+
+	ld		hl, ScubPalette
+	call	LoadPalette
+	; copy tiles
+	ld bc, ScubTilesEnd - ScubaTiles
+	ld de, _VRAM
+	ld hl, ScubaTiles
+	call memcpy
+
+	; copy map to VRAM
+	ld		hl, ScubaMapPLN0
+	call	CopyTileMap
+
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, ScubaMapPLN1
 	call	CopyTileMap
 
 	ld		a, 0
@@ -865,6 +1186,30 @@ INCLUDE "AirplaneWindowTiles.inc"
 INCLUDE "AirplaneWindowTiles.z80"
 INCLUDE "AirplaneWindowMap.z80"
 
+INCLUDE "SandDunesTiles.inc"
+INCLUDE "SandDunesTiles.z80"
+INCLUDE "SandDunesMap.z80"
+
+INCLUDE "FallsTiles.inc"
+INCLUDE "FallsTiles.z80"
+INCLUDE "FallsMap.z80"
+
+INCLUDE "IslandTiles.inc"
+INCLUDE "IslandTiles.z80"
+INCLUDE "IslandMap.z80"
+
+INCLUDE "KilliTiles.inc"
+INCLUDE "KilliTiles.z80"
+INCLUDE "KilliMap.z80"
+
+INCLUDE "SafariTiles.inc"
+INCLUDE "SafariTiles.z80"
+INCLUDE "SafariMap.z80"
+
+INCLUDE "ScubaTiles.inc"
+INCLUDE "ScubaTiles.z80"
+INCLUDE "ScubaMap.z80"
+
 INCLUDE "PyramidsTiles.z80"
 INCLUDE "PyramidMap.z80"
 INCLUDE "PyramidsTiles.inc"
@@ -872,6 +1217,10 @@ INCLUDE "PyramidsTiles.inc"
 INCLUDE "CrossTiles.inc"
 INCLUDE "CrossTiles.z80"
 INCLUDE "CrossMap.z80"
+
+INCLUDE "ErtaAleTiles.inc"
+INCLUDE "ErtaAleTiles.z80"
+INCLUDE "ErtaAleMap.z80"
 
 ; Additional Maps
 
