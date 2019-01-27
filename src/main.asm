@@ -103,6 +103,9 @@ tileBytesToLoadLow		RB 1
 tileBytesToLoadSizeHigh	RB 1
 tileBytesToLoadSizeLow	RB 1
 
+mapAddressHigh			RB 1
+mapAddressLow			RB 1
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RSSET _RAM_BLOCK_0 + 96
 _RAM_BLOCK_1			RB 0
@@ -265,6 +268,7 @@ _BLACK EQU %0000000000000000
 	call	mem_CopyMono
 
 	; copy tile map to VRAM
+	ld		hl, TestMap
 	call	CopyTileMap
 
 	ld		a, 0
@@ -357,6 +361,12 @@ GameLoop:
 	jp z, .doneLoadTiles
 .loadTiles:
 	call memcpy
+.loadMap:
+	ld a, [mapAddressHigh]
+	ld h, a
+	ld a, [mapAddressLow]
+	ld l, a
+	call CopyTileMap
 .doneLoadTiles:	
 	
 	; set camera scroll position
@@ -439,6 +449,13 @@ LoadPyramids:
 	ld [tileBytesToLoadSizeHigh], a
 	ld a, c
 	ld [tileBytesToLoadSizeLow], a
+	
+	ld bc, PyramidMap
+	ld a, b
+	ld [mapAddressHigh], a
+	ld a, c
+	ld [mapAddressLow], a
+	ld [tileBytesToLoadSizeLow], a
 	ret
 	
 LoadAirplane:
@@ -452,6 +469,12 @@ LoadAirplane:
 	ld [tileBytesToLoadSizeHigh], a
 	ld a, c
 	ld [tileBytesToLoadSizeLow], a
+	
+	ld bc, AirplaneMap
+	ld a, b
+	ld [mapAddressHigh], a
+	ld a, c
+	ld [mapAddressLow], a
 	ret
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -601,7 +624,6 @@ UpdateWindowVisibility:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 CopyTileMap:
-	ld		hl, TestMap
 	ld		de, _SCRN0		; map 0 loaction
 	ld		b, 18	; number of lines to copy
 
@@ -743,6 +765,10 @@ AirplaneTiles:
 	DB $44,$44,$44,$44,$44,$44,$44,$44
 EndAirplaneTiles:
 
+AirplaneMap:
+INCLUDE "AirplaneWindowMap.z80"
+EndAirplaneMap:
+
 SafariTiles:
 	DB $00,$00,$00,$00,$00,$00,$00,$00
 EndSafariTiles:
@@ -754,6 +780,10 @@ EndWaterfallTiles:
 PyramidTiles:
 	DB $00,$00,$00,$00,$00,$00,$00,$00
 EndPyramidTiles:
+
+PyramidMap:
+INCLUDE "PyramidMap.z80"
+EndPyramidMap:
 
 INCLUDE "TestMap.z80"
 
