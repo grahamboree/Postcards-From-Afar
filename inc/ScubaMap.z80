@@ -18,7 +18,7 @@ ScubaMapWidth  EQU 20
 ScubaMapHeight EQU 18
 ScubaMapBank   EQU 0
 
- SECTION "ScubaMap", HOME
+ SECTION "ScubaMap", ROMX, BANK[1]
 
 ScubaMap::
 DB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00

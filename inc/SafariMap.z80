@@ -18,7 +18,7 @@ SafariLabelWidth  EQU 20
 SafariLabelHeight EQU 18
 SafariLabelBank   EQU 1
 
- SECTION "SafariSection", DATA, BANK[1]
+ SECTION "SafariSection", ROMX, BANK[1]
 
 SafariLabel::
 DB $20,$20,$20,$20,$20,$20,$20,$20,$20,$20
