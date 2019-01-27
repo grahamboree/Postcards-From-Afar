@@ -18,7 +18,7 @@ PyramidLabelWidth  EQU 20
 PyramidLabelHeight EQU 18
 PyramidLabelBank   EQU 0
 
- SECTION "PyramidSection", HOME
+ SECTION "PyramidSection", ROM0
 
 PyramidLabel::
 DB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
