@@ -734,29 +734,104 @@ UITiles:
 	INCLUDE "UiTiles.inc"
 UITilesEnd:
 
+;Tiles and Maps for Large Images
+
+;Intro
 AirplaneTiles:
-	DB $44,$44,$44,$44,$44,$44,$44,$44
+	INCLUDE "AirplaneWindowTiles.z80"
 EndAirplaneTiles:
 
 AirplaneMap:
-INCLUDE "AirplaneWindowMap.z80"
+	INCLUDE "AirplaneWindowMap.z80"
 EndAirplaneMap:
 
-SafariTiles:
+;Act 1
+
+DunesTiles:
 	DB $00,$00,$00,$00,$00,$00,$00,$00
-EndSafariTiles:
+EndDunesTiles:
+
+DunesMap:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndDunesMap:
 
 WaterfallTiles:
 	DB $00,$00,$00,$00,$00,$00,$00,$00
 EndWaterfallTiles:
 
+WaterfallMap:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndWaterfallMap:
+
+RobbenIslandTiles:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndRobbenIslandTiles:
+
+RobbenIslandMap:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndRobbenIslandMap:
+
+;Act 2
+SafariTiles:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndSafariTiles:
+
+SafariMap:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndSafariMap:
+
+ScubaTiles:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndScubaTiles:
+
+ScubaMap:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndScubaMap:
+
+KiliTiles:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndKiliTiles:
+
+KiliMap:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndKiliMap:
+
+;Act 3
 PyramidTiles:
 	INCLUDE "PyramidsTiles.inc"
 EndPyramidTiles:
 
 PyramidMap:
-INCLUDE "PyramidMap.z80"
+	INCLUDE "PyramidMap.z80"
 EndPyramidMap:
+
+VolcanoTiles:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndVolcanoTiles:
+
+VolcanoMap:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndVolcanoMap:
+
+ChurchTiles:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndChurchTiles:
+
+ChurchMap:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndChurchMap:
+
+;Outro
+
+OutroTiles:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndOutroTiles:
+
+OutroMap:
+	DB $00,$00,$00,$00,$00,$00,$00,$00
+EndOutroMap:
+
+; Additional Maps
 
 INCLUDE "TestMap.z80"
 
