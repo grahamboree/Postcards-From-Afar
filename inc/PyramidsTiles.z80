@@ -100,5 +100,5 @@ DB $55,$00,$AA,$00,$00,$00,$00,$00
 DB $55,$55,$AA,$AA,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FD,$FD,$FF,$FF,$FF,$FF
 DB $FF,$FF,$DF,$DF,$FF,$FF,$FF,$FF
-
+PyrmaidsTilesEnd:
 ; End of PYRAMIDSTILES.Z80

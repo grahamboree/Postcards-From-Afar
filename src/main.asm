@@ -237,7 +237,7 @@ Init:
 	call 	memcpy
 
 	; load start screen toggle value
-	ld		a, 1
+	ld		a, 0
 	ld		[wantWindowVisible], a
 
 	; set current background offset
@@ -315,7 +315,6 @@ GameLoop:
 	ld a, b
 	or c
 	jp z, .doneLoadTiles
-	jp .loadMap
 .loadTiles:
 	call memcpy
 .loadMap:
@@ -359,20 +358,21 @@ GregTempCode:
 	cp 0
 	jp z, .doNotLoad
 	
-	ld a, [isPyramidsLoaded]
-	cp 0
-	jp nz, .loadAirplane
-	
 	call LoadPyramids
-	ld a, 1
-	ld [isPyramidsLoaded], a
-	jp .doNotLoad
+	; ld a, [isPyramidsLoaded]
+	; cp 0
+	; jp nz, .loadAirplane
 	
-.loadAirplane
-	call LoadAirplane
-	ld a, 0
-	ld [isPyramidsLoaded], a
-	jp .doNotLoad
+	; call LoadPyramids
+	; ld a, 1
+	; ld [isPyramidsLoaded], a
+	; jp .doNotLoad
+	
+; .loadAirplane
+	; call LoadAirplane
+	; ld a, 0
+	; ld [isPyramidsLoaded], a
+	; jp .doNotLoad
 	
 .doNotLoad:
 	ret
@@ -396,15 +396,15 @@ PreVBlank:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Load the various large images on VBlank, and do any other scene-transition work
 LoadPyramids:
-	ld bc, PyramidTiles
+	ld bc, PyrmaidsTiles
 	ld a, b
 	ld [tileBytesToLoadHigh], a
 	ld a, c
 	ld [tileBytesToLoadLow], a
-	ld bc, EndPyramidTiles - PyramidTiles
-	ld a, b
+	ld de, PyrmaidsTilesEnd - PyrmaidsTiles
+	ld a, d
 	ld [tileBytesToLoadSizeHigh], a
-	ld a, c
+	ld a, e
 	ld [tileBytesToLoadSizeLow], a
 	
 	ld bc, PyramidMap
@@ -412,7 +412,6 @@ LoadPyramids:
 	ld [mapAddressHigh], a
 	ld a, c
 	ld [mapAddressLow], a
-	ld [tileBytesToLoadSizeLow], a
 	ret
 	
 LoadAirplane:
@@ -779,13 +778,16 @@ KiliMap:
 EndKiliMap:
 
 ;Act 3
-PyramidTiles:
-	INCLUDE "PyramidsTiles.inc"
-EndPyramidTiles:
+PyramidMaster:
+	INCLUDE "PyramidsTiles.z80"
+EndPyramidMaster:
 
 PyramidMap:
 	INCLUDE "PyramidMap.z80"
 EndPyramidMap:
+
+	INCLUDE "PyramidsTiles.inc"
+EndPyramidPalette:
 
 VolcanoTiles:
 	DB $00,$00,$00,$00,$00,$00,$00,$00
