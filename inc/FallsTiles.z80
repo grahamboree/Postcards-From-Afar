@@ -23,7 +23,7 @@
  SECTION "FallsSection", ROMX, BANK[1]
 
 ; Start of tile array.
-FallsLabel::
+FallsTiles::
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $FF,$00,$FF,$00,$FF,$00,$FF,$00
@@ -98,5 +98,5 @@ DB $FF,$00,$FF,$00,$FF,$00,$FF,$08
 DB $FF,$40,$FF,$08,$FF,$00,$FF,$00
 DB $00,$FF,$00,$FF,$00,$FF,$00,$FE
 DB $00,$FC,$00,$C0,$00,$80,$00,$C0
-
+FallsTilesEnd:
 ; End of FALLSTILES.Z80

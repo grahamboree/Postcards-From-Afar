@@ -23,7 +23,7 @@
  SECTION "KilliSection", HOME
 
 ; Start of tile array.
-KilliLabel::
+KilliTiles::
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$55,$00
@@ -98,5 +98,5 @@ DB $FF,$00,$FD,$00,$3F,$00,$FE,$00
 DB $81,$00,$03,$00,$07,$00,$FF,$00
 DB $FF,$00,$FF,$00,$8F,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$C7,$00
-
+KiliTilesEnd:
 ; End of KILLITILES.Z80

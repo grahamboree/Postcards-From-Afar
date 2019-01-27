@@ -23,7 +23,7 @@
  SECTION "SafariSection", ROMX, BANK[1]
 
 ; Start of tile array.
-SafariLabel::
+SafariTiles::
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $FF,$00,$FF,$00,$FF,$00,$FF,$00
@@ -78,5 +78,5 @@ DB $FF,$FF,$FF,$FF,$FF,$9F,$FF,$0F
 DB $FF,$07,$FF,$01,$FF,$00,$FF,$00
 DB $FF,$1F,$FF,$0F,$FF,$07,$FF,$07
 DB $FF,$03,$FF,$01,$FF,$00,$FF,$00
-
+SafariTilesEnd:
 ; End of SAFARITILES.Z80

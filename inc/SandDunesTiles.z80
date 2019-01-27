@@ -23,7 +23,7 @@
  SECTION "SandDunesSection", ROMX, BANK[1]
 
 ; Start of tile array.
-SandDunesLabel::
+SandDunesTiles::
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $FF,$00,$FF,$00,$FF,$00,$FF,$00
@@ -68,5 +68,5 @@ DB $00,$FF,$03,$FF,$03,$FF,$03,$FF
 DB $03,$FF,$01,$FF,$80,$FF,$FE,$FF
 DB $55,$55,$AA,$AA,$55,$55,$0A,$0A
 DB $04,$04,$00,$00,$00,$00,$00,$00
-
+SandDuneTilesEnd:
 ; End of SANDDUNESTILES.Z80

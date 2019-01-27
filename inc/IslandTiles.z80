@@ -23,7 +23,7 @@
  SECTION "IslandSection", ROMX, BANK[1]
 
 ; Start of tile array.
-IslandLabel::
+IslandTiles::
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $FF,$00,$FF,$00,$FF,$00,$FF,$00
@@ -84,5 +84,5 @@ DB $FF,$FF,$BF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FD,$FF,$FF,$FF,$FF,$FF
-
+IslandTilesEnd:
 ; End of ISLANDTILES.Z80

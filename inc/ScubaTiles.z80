@@ -23,7 +23,7 @@
  SECTION "Scuba", ROMX, BANK[1]
 
 ; Start of tile array.
-ScubeTiles::
+ScubaTiles::
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $55,$00,$AA,$00,$00,$00,$00,$00
@@ -94,5 +94,5 @@ DB $00,$FF,$00,$FF,$00,$FF,$38,$FF
 DB $3C,$FF,$7E,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$EF,$EF,$FC,$FC,$6F,$6F
 DB $C1,$C1,$CF,$CF,$CF,$CF,$9F,$9F
-
+ScubaTilesEnd:
 ; End of SCUBATILES.Z80

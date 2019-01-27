@@ -23,7 +23,7 @@
  SECTION "ErtaAleSection", ROMX, BANK[1]
 
 ; Start of tile array.
-ErtaAleLabel::
+ErtaAleTiles::
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $FF,$00,$FF,$00,$FF,$00,$FF,$00
@@ -76,5 +76,5 @@ DB $00,$FF,$02,$FD,$20,$DD,$10,$E7
 DB $0A,$F5,$00,$FF,$20,$DF,$00,$FF
 DB $00,$FF,$80,$FF,$00,$FF,$A0,$FF
 DB $50,$FF,$AA,$FF,$55,$FF,$AA,$FF
-
+ErtaAleTilesEnd:
 ; End of ERTAALETILES.Z80
