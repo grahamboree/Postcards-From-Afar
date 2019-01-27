@@ -218,13 +218,19 @@ Init:
 	call	LoadPalette
 
 	; copy tiles to VRAM
-	ld		hl, FontData				; source
-	ld		de, _VRAM					; destination
-	ld		bc, EndFontData - FontData	; number of bytes to copy
-	call	mem_CopyMono
+	;ld		hl, FontData				; source
+	;ld		de, _VRAM					; destination
+	;ld		bc, EndFontData - FontData	; number of bytes to copy
+	;call	mem_CopyMono
+	
+	; copy tiles
+	ld bc, PyrmaidsTilesEnd - PyrmaidsTiles
+	ld de, _VRAM
+	ld hl, PyrmaidsTiles
+	call memcpy
 
-	; copy tile map to VRAM
-	ld		hl, TestMap
+	; copy map to VRAM
+	ld		hl, PyramidLabelPLN0
 	call	CopyTileMap
 
 	ld		a, 0
@@ -407,11 +413,12 @@ LoadPyramids:
 	ld a, e
 	ld [tileBytesToLoadSizeLow], a
 	
-	ld bc, PyramidMap
+	ld bc, PyramidLabel
 	ld a, b
 	ld [mapAddressHigh], a
 	ld a, c
 	ld [mapAddressLow], a
+	
 	ret
 	
 LoadAirplane:
@@ -778,16 +785,9 @@ KiliMap:
 EndKiliMap:
 
 ;Act 3
-PyramidMaster:
 	INCLUDE "PyramidsTiles.z80"
-EndPyramidMaster:
-
-PyramidMap:
 	INCLUDE "PyramidMap.z80"
-EndPyramidMap:
-
 	INCLUDE "PyramidsTiles.inc"
-EndPyramidPalette:
 
 VolcanoTiles:
 	DB $00,$00,$00,$00,$00,$00,$00,$00
