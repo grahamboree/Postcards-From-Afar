@@ -4,13 +4,13 @@
 ;
 ; Info:
 ;   Section              : Tiles
-;   Bank                 : 0
+;   Bank                 : 1
 ;   Form                 : All tiles as one unit.
 ;   Format               : Gameboy 4 color.
 ;   Compression          : None.
 ;   Counter              : None.
-;   Tile size            : 16 x 16
-;   Tiles                : 0 to 31
+;   Tile size            : 8 x 8
+;   Tiles                : 0 to 127
 ;
 ;   Palette colors       : Included.
 ;   SGB Palette          : None.
@@ -22,7 +22,7 @@
 
 
 ; Bank of tiles.
-TileLabelBank EQU 0
+TileLabelBank EQU 1
 
 ; Super Gameboy palette 0
 TileLabelSGBPal0c0 EQU 6076
@@ -104,13 +104,13 @@ TileLabelCGB3 EQU 0
 TileLabelCGB4 EQU 0
 TileLabelCGB5 EQU 0
 TileLabelCGB6 EQU 0
-TileLabelCGB7 EQU 1
-TileLabelCGB8 EQU 1
-TileLabelCGB9 EQU 1
-TileLabelCGB10 EQU 1
+TileLabelCGB7 EQU 0
+TileLabelCGB8 EQU 0
+TileLabelCGB9 EQU 0
+TileLabelCGB10 EQU 0
 TileLabelCGB11 EQU 1
-TileLabelCGB12 EQU 1
-TileLabelCGB13 EQU 1
+TileLabelCGB12 EQU 0
+TileLabelCGB13 EQU 0
 TileLabelCGB14 EQU 1
 TileLabelCGB15 EQU 1
 TileLabelCGB16 EQU 1
@@ -129,6 +129,102 @@ TileLabelCGB28 EQU 1
 TileLabelCGB29 EQU 1
 TileLabelCGB30 EQU 1
 TileLabelCGB31 EQU 1
+TileLabelCGB32 EQU 1
+TileLabelCGB33 EQU 1
+TileLabelCGB34 EQU 1
+TileLabelCGB35 EQU 1
+TileLabelCGB36 EQU 1
+TileLabelCGB37 EQU 1
+TileLabelCGB38 EQU 1
+TileLabelCGB39 EQU 1
+TileLabelCGB40 EQU 1
+TileLabelCGB41 EQU 1
+TileLabelCGB42 EQU 1
+TileLabelCGB43 EQU 1
+TileLabelCGB44 EQU 1
+TileLabelCGB45 EQU 1
+TileLabelCGB46 EQU 1
+TileLabelCGB47 EQU 1
+TileLabelCGB48 EQU 1
+TileLabelCGB49 EQU 1
+TileLabelCGB50 EQU 1
+TileLabelCGB51 EQU 1
+TileLabelCGB52 EQU 1
+TileLabelCGB53 EQU 1
+TileLabelCGB54 EQU 1
+TileLabelCGB55 EQU 1
+TileLabelCGB56 EQU 1
+TileLabelCGB57 EQU 1
+TileLabelCGB58 EQU 1
+TileLabelCGB59 EQU 1
+TileLabelCGB60 EQU 1
+TileLabelCGB61 EQU 0
+TileLabelCGB62 EQU 0
+TileLabelCGB63 EQU 0
+TileLabelCGB64 EQU 1
+TileLabelCGB65 EQU 1
+TileLabelCGB66 EQU 1
+TileLabelCGB67 EQU 1
+TileLabelCGB68 EQU 1
+TileLabelCGB69 EQU 1
+TileLabelCGB70 EQU 1
+TileLabelCGB71 EQU 1
+TileLabelCGB72 EQU 1
+TileLabelCGB73 EQU 1
+TileLabelCGB74 EQU 1
+TileLabelCGB75 EQU 1
+TileLabelCGB76 EQU 1
+TileLabelCGB77 EQU 1
+TileLabelCGB78 EQU 1
+TileLabelCGB79 EQU 1
+TileLabelCGB80 EQU 1
+TileLabelCGB81 EQU 1
+TileLabelCGB82 EQU 1
+TileLabelCGB83 EQU 1
+TileLabelCGB84 EQU 1
+TileLabelCGB85 EQU 1
+TileLabelCGB86 EQU 1
+TileLabelCGB87 EQU 1
+TileLabelCGB88 EQU 1
+TileLabelCGB89 EQU 1
+TileLabelCGB90 EQU 1
+TileLabelCGB91 EQU 1
+TileLabelCGB92 EQU 1
+TileLabelCGB93 EQU 1
+TileLabelCGB94 EQU 1
+TileLabelCGB95 EQU 1
+TileLabelCGB96 EQU 1
+TileLabelCGB97 EQU 1
+TileLabelCGB98 EQU 1
+TileLabelCGB99 EQU 1
+TileLabelCGB100 EQU 1
+TileLabelCGB101 EQU 1
+TileLabelCGB102 EQU 1
+TileLabelCGB103 EQU 1
+TileLabelCGB104 EQU 1
+TileLabelCGB105 EQU 1
+TileLabelCGB106 EQU 1
+TileLabelCGB107 EQU 1
+TileLabelCGB108 EQU 1
+TileLabelCGB109 EQU 1
+TileLabelCGB110 EQU 1
+TileLabelCGB111 EQU 1
+TileLabelCGB112 EQU 1
+TileLabelCGB113 EQU 1
+TileLabelCGB114 EQU 1
+TileLabelCGB115 EQU 1
+TileLabelCGB116 EQU 1
+TileLabelCGB117 EQU 1
+TileLabelCGB118 EQU 1
+TileLabelCGB119 EQU 1
+TileLabelCGB120 EQU 1
+TileLabelCGB121 EQU 1
+TileLabelCGB122 EQU 1
+TileLabelCGB123 EQU 1
+TileLabelCGB124 EQU 1
+TileLabelCGB125 EQU 1
+TileLabelCGB126 EQU 1
+TileLabelCGB127 EQU 1
 
 ; Start of tile array.
  GLOBAL TileLabel
