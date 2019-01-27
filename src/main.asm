@@ -29,7 +29,6 @@ _CHOOSE_CARD  EQU	3
 _READ_CARD	  EQU	4
 _OUTRO		  EQU	5
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Ram
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -215,45 +214,8 @@ Init:
 	ld		hl, $FF4F
 	ld		[hl], 0
 
-; palette colors
-; BGR 555  %0bbbbbgggggrrrrr
-_BLUE  EQU %0111110000000000
-_GREEN EQU %0000001111100000
-_RED   EQU %0000000000011111
-_BLACK EQU %0000000000000000
-
-	ld		b, 8
-.setPalettes
-	; set bg 0 palette
-	ld		hl, rBGPI
-	ld		[hl], %10000000
-	ld		hl, rBGPD
-	ld		[hl],  LOW( _BLUE  )
-	ld		[hl], HIGH( _BLUE  )
-	ld		[hl],  LOW( _GREEN )
-	ld		[hl], HIGH( _GREEN )
-	ld		[hl],  LOW( _RED   )
-	ld		[hl], HIGH( _RED   )
-	ld		[hl],  LOW( _BLACK )
-	ld		[hl], HIGH( _BLACK )
-
-	; set sprite palette 0
-	; BGR 555
-	; 0bbbbbgg gggrrrrr
-	ld		hl, rOBPI
-	ld		[hl], %10000000
-	ld		hl, rOBPD
-	ld		[hl],  LOW( _BLUE  )
-	ld		[hl], HIGH( _BLUE  )
-	ld		[hl],  LOW( _GREEN )
-	ld		[hl], HIGH( _GREEN )
-	ld		[hl],  LOW( _RED   )
-	ld		[hl], HIGH( _RED   )
-	ld		[hl],  LOW( _BLACK )
-	ld		[hl], HIGH( _BLACK )
-
-	dec		b
-	jr		nz, .setPalettes
+	ld		hl, PyramidPalette
+	call	LoadPalette
 
 	; copy tiles to VRAM
 	ld		hl, Tiles				; source
@@ -535,8 +497,6 @@ DetectPadEvents:
 	ld		[padOldState], a
 
 	ret
-	
-	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 UpdateTextMap:
@@ -650,6 +610,18 @@ CopyTileMap:
 	jr 		.copy_bg_row	; loop
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Expects palette address on hl
+LoadPalette:
+	; palette colors
+	; BGR 555  %0bbbbbgggggrrrrr
+	ld		a, %10000000
+	ld		[rBGPI], a
+	REPT	64
+	ld		a, [hl+]
+	ld		[rBGPD], a
+	ENDR
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; DMA Transfer routine
 ; writes the shadow OAM address to the DMA register and spins
 ; for 160 microseconds while the copy is done by hardware
@@ -759,7 +731,7 @@ Text2:
 Text2End:
 
 UITiles:
-INCLUDE "UiTiles.inc"
+	INCLUDE "UiTiles.inc"
 UITilesEnd:
 
 AirplaneTiles:
@@ -779,7 +751,7 @@ WaterfallTiles:
 EndWaterfallTiles:
 
 PyramidTiles:
-	DB $00,$00,$00,$00,$00,$00,$00,$00
+	INCLUDE "PyramidsTiles.inc"
 EndPyramidTiles:
 
 PyramidMap:
