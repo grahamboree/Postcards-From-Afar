@@ -18,7 +18,7 @@ ErtaAleLabelWidth  EQU 20
 ErtaAleLabelHeight EQU 18
 ErtaAleLabelBank   EQU 0
 
- SECTION "ErtaAleSection", HOME
+ SECTION "ErtaAleSection", ROMX, BANK[1]
 
 ErtaAleLabel::
 DB $00,$00,$00,$80,$20,$20,$20,$20,$20,$20

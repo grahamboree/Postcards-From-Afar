@@ -18,7 +18,7 @@ LocationSelectorWidth  EQU 20
 LocationSelectorHeight EQU 18
 LocationSelectorBank   EQU 0
 
- SECTION "Selector", HOME
+ SECTION "Selector", ROM0
 
 LocationSelector::
 DB $00,$00,$22,$22,$22,$22,$22,$2A,$00

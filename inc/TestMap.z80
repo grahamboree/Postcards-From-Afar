@@ -18,7 +18,7 @@ TestMapWidth  EQU 20
 TestMapHeight EQU 18
 TestMapBank   EQU 0
 
- SECTION "Test", ROM0
+ SECTION "Test", ROMX, BANK[1]
 
 TestMap::
 DB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00

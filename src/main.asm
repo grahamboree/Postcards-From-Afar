@@ -218,12 +218,6 @@ Init:
 	call	LoadPalette
 
 	; copy tiles to VRAM
-	ld		hl, Tiles				; source
-	ld		de, _VRAM				; destination
-	ld		bc, EndTiles - Tiles	; number of bytes to copy
-	call	memcpy
-
-	; copy tiles to VRAM
 	ld		hl, FontData				; source
 	ld		de, _VRAM					; destination
 	ld		bc, EndFontData - FontData	; number of bytes to copy
@@ -709,18 +703,6 @@ memfill:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Sprites
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-Tiles:
-	INCLUDE "maintiles.z80"
-EndTiles:
-
-Map:
-	INCLUDE"mainmap.z80"
-EndMap:
-
-WindowStart:
-	INCLUDE"windowstart.z80"
-EndWindowStart:
 
 Text:
 	INCLUDE "text.inc"
