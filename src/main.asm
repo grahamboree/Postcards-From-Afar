@@ -601,9 +601,9 @@ UpdateWindowVisibility:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 CopyTileMap:
-	ld		hl, MAIN_MAP
+	ld		hl, TestMap
 	ld		de, _SCRN0		; map 0 loaction
-	ld		b, 32	; number of lines to copy
+	ld		b, 18	; number of lines to copy
 
 .copy_bg_row
 	ld		a, b 	; do we have more lines to copy?
@@ -613,11 +613,15 @@ CopyTileMap:
 	dec 	b		; decrement the line count and save it
 	push 	bc
 
-	ld		bc, 32	; lines are 32 bytes
+	ld		bc, 20	; lines are 20 bytes
 	call 	memcpy	; copy a line
-
-	ld		bc, 96	; stride in the source
-	add		hl, bc
+	
+	push	hl
+	ld		hl, 12
+	add     hl, de
+	ld		d, h
+	ld		e, l
+	pop		hl
 
 	pop 	bc
 	jr 		.copy_bg_row	; loop
@@ -750,6 +754,8 @@ EndWaterfallTiles:
 PyramidTiles:
 	DB $00,$00,$00,$00,$00,$00,$00,$00
 EndPyramidTiles:
+
+INCLUDE "TestMap.z80"
 
 LocationCursor:
 	INCLUDE "LocationSelector.inc"
