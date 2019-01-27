@@ -22,7 +22,6 @@
 
 
 ; Bank of tiles.
-SafariLabelBank EQU 1
 SafariPalette:
 ; Super Gameboy palette 0
 

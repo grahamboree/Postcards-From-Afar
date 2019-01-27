@@ -23,7 +23,7 @@
  SECTION "CrossTiles", ROMX, BANK[1]
 
 ; Start of tile array.
-CrossLabel::
+CrossTiles:
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $FF,$00,$FF,$00,$FF,$00,$FF,$00
@@ -128,5 +128,6 @@ DB $00,$00,$01,$00,$02,$00,$05,$00
 DB $0A,$00,$15,$00,$2A,$00,$55,$00
 DB $FF,$00,$FF,$80,$FF,$C0,$FF,$E0
 DB $FF,$B0,$FF,$F8,$FF,$AC,$FF,$FE
+CrossTilesEnd
 
 ; End of CROSSTILES.Z80

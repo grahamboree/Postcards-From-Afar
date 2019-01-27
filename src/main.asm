@@ -362,6 +362,13 @@ GregTempCode:
 	inc a
 	ld [hl], a
 
+
+	cp 11
+	jr nz, .nomod
+	sub 10
+	ld [hl], a
+
+.nomod:
 	cp 1
 	jr z, .image1
 	cp 2
@@ -726,22 +733,22 @@ LoadErta:
 	ld		a, 0
 	ld		[$FF4F], a
 
-	ld		hl, ErtaPalette
+	ld		hl, ErtaAlePalette
 	call	LoadPalette
 	; copy tiles
-	ld bc, ErtaTilesEnd - ErtaTiles
+	ld bc, ErtaAleTilesEnd - ErtaAleTiles
 	ld de, _VRAM
-	ld hl, ErtaTiles
+	ld hl, ErtaAleTiles
 	call memcpy
 
 	; copy map to VRAM
-	ld		hl, ErtaPLN0
+	ld		hl, ErtaAlePLN0
 	call	CopyTileMap
 
 	ld		a, 1
 	ld		[$FF4F], a
 
-	ld		hl, ErtaPLN1
+	ld		hl, ErtaAlePLN1
 	call	CopyTileMap
 
 	ld		a, 0
@@ -869,10 +876,10 @@ LoadScuba:
 	ld		a, 0
 	ld		[$FF4F], a
 
-	ld		hl, ScubPalette
+	ld		hl, ScubaPalette
 	call	LoadPalette
 	; copy tiles
-	ld bc, ScubTilesEnd - ScubaTiles
+	ld bc, ScubaTilesEnd - ScubaTiles
 	ld de, _VRAM
 	ld hl, ScubaTiles
 	call memcpy

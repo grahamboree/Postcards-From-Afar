@@ -22,7 +22,6 @@
 
 
 ; Bank of tiles.
-FallsLabelBank EQU 1
 FallsPalette:
 ; Super Gameboy palette 0
 

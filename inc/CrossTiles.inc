@@ -22,7 +22,6 @@
 
 
 ; Bank of tiles.
-CrossLabelBank EQU 0
 CrossPalette:
 ; Super Gameboy palette 0
 
