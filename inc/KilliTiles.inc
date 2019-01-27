@@ -23,7 +23,7 @@
 
 ; Bank of tiles.
 KilliLabelBank EQU 0
-
+KiliPalette:
 ; Super Gameboy palette 0
 
 

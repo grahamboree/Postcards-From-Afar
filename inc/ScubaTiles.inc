@@ -23,7 +23,7 @@
 
 ; Bank of tiles.
 ScubeTilesBank EQU 0
-
+ScubaPalette:
 ; Super Gameboy palette 0
 
 

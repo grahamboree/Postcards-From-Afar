@@ -23,7 +23,7 @@
 
 ; Bank of tiles.
 SandDunesLabelBank EQU 1
-
+SandDunesPalette:
 ; Super Gameboy palette 0
 
 

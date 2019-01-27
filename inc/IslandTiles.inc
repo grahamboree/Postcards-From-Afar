@@ -23,7 +23,7 @@
 
 ; Bank of tiles.
 IslandLabelBank EQU 1
-
+IslandPalette:
 ; Super Gameboy palette 0
 
 

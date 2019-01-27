@@ -23,7 +23,7 @@
 
 ; Bank of tiles.
 ErtaAleLabelBank EQU 0
-
+ErtaAlePalette:
 ; Super Gameboy palette 0
 
 

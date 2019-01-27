@@ -23,7 +23,7 @@
 
 ; Bank of tiles.
 TileLabelBank EQU 1
-
+AirplanePalette:
 ; Super Gameboy palette 0
 
 
@@ -43,7 +43,6 @@ TileLabelBank EQU 1
 
 
 ; Super Gameboy palette 3
-
 
 
 
