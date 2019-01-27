@@ -229,6 +229,20 @@ Init:
 	ld hl, PyrmaidsTiles
 	call memcpy
 
+	ld		a, 1
+	ld		[$FF4F], a
+
+	ld		hl, PyramidLabelPLN1
+	call	CopyTileMap
+
+	;ld		a, 0		; put everything to zero
+	;ld		bc, 32*32	; 
+	;ld		hl, _SCRN0
+	;call 	memfill
+
+	ld		a, 0
+	ld		[$FF4F], a
+
 	; copy map to VRAM
 	ld		hl, PyramidLabelPLN0
 	call	CopyTileMap
@@ -585,6 +599,32 @@ UpdateWindowVisibility:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 CopyTileMap:
+	ld		de, _SCRN0		; map 0 loaction
+	ld		b, 18	; number of lines to copy
+
+.copy_bg_row
+	ld		a, b 	; do we have more lines to copy?
+	cp 		0		; sets the flags
+	ret 	z		; if zero, return
+
+	dec 	b		; decrement the line count and save it
+	push 	bc
+
+	ld		bc, 20	; lines are 20 bytes
+	call 	memcpy	; copy a line
+	
+	push	hl
+	ld		hl, 12
+	add     hl, de
+	ld		d, h
+	ld		e, l
+	pop		hl
+
+	pop 	bc
+	jr 		.copy_bg_row	; loop
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+CopyTileMapAttribs:
 	ld		de, _SCRN0		; map 0 loaction
 	ld		b, 18	; number of lines to copy
 
