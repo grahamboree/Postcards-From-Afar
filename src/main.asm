@@ -115,6 +115,8 @@ wantWindowVisible		RB 1
 currentTextPage			RB 1
 desiredTextPage			RB 1
 
+imageNum				RB 1
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RSSET _RAM_BLOCK_1 + 128
 _RAM_BLOCK_2			RB 0
@@ -233,6 +235,9 @@ Init:
 	ld		a, 0
 	ld		[wantWindowVisible], a
 
+	ld		a, 0
+	ld		[imageNum], a
+
 	; set current background offset
 	ld 		a, 6
 	ld 		[bgOffset], a
@@ -349,28 +354,58 @@ GregTempCode:
 	
 	ld a, [padDown]
 	cp 0
-	jp z, .doNotLoad
-	
-	call LoadPyramids
-	; ld a, [isPyramidsLoaded]
-	; cp 0
-	; jp nz, .loadAirplane
-	
-	; call LoadPyramids
-	; ld a, 1
-	; ld [isPyramidsLoaded], a
-	; jp .doNotLoad
-	
-; .loadAirplane
-	; call LoadAirplane
-	; ld a, 0
-	; ld [isPyramidsLoaded], a
-	; jp .doNotLoad
-	
-.doNotLoad:
+	ret z
+
+; bump image num
+	ld hl, imageNum
+	ld a, [hl]
+	inc a
+	ld [hl], a
+
+	cp 1
+	jr z, .image1
+	cp 2
+	jr z, .image1
+	cp 3
+	jr z, .image1
+	cp 4
+	jr z, .image1
+	cp 5
+	jr z, .image1
+	cp 6
+	jr z, .image1
+	cp 7
+	jr z, .image1
+	cp 8
+	jr z, .image1
+	cp 9
+	jr z, .image1
+	cp 10
+	jr z, .image1
 	ret
-	;End Temp Code
-	
+
+.image1
+	call LoadPyramids
+	ret
+.image2
+	ret
+.image3
+	ret
+.image4
+	ret
+.image5
+	ret
+.image6
+	ret
+.image7
+	ret
+.image8
+	ret
+.image9
+	ret
+.image10
+	ret
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Code to save cycles in VBlank. Must be executed immediately before the VBlank check in main loop.
 PreVBlank:
