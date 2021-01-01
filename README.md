@@ -11,6 +11,7 @@
 <p align="center">
   <img width=370 height=333 src="https://github.com/grahamboree/Postcards-From-Afar/raw/master/screenshots/cross.png" />
   <img width=370 height=333 src="https://github.com/grahamboree/Postcards-From-Afar/raw/master/screenshots/pyramids.png" />
+</p>
 <p align="center">
   <img width=370 height=333 src="https://github.com/grahamboree/Postcards-From-Afar/raw/master/screenshots/scuba.png" />
   <img width=370 height=333 src="https://github.com/grahamboree/Postcards-From-Afar/raw/master/screenshots/killi.png" />
