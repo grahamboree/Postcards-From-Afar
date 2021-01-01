@@ -26,13 +26,18 @@
 
   Developed in z80 asm for the Game Boy Color using the RGBDS BGB GameBoy Emulator Tile Designer and Tile Map Editor
 
+
+
+# Credits
+
 <p align="center">
   <img src="https://github.com/grahamboree/Postcards-From-Afar/raw/master/screenshots/team.jpg" />
 </p>
 
-# Credits
-
 Sofie Ayala - Writing
+
 Luigi Guatieri - Art
+
 Greg Kinneman - Design, Programming
+
 Graham Pentheny - Programming
