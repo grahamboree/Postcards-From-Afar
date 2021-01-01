@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/grahamboree/Postcards-From-Afar/blob/master/screenshots/airplanewindow.png" />
+  <img width=420 height=298 src="https://github.com/grahamboree/Postcards-From-Afar/blob/master/screenshots/airplanewindow.png" />
 </p>
 
 # Postcards From Afar
